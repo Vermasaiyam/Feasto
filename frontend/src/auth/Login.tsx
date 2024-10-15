@@ -2,10 +2,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { Loader2, LockKeyhole, Mail } from "lucide-react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 
 const Login = () => {
+    const [show, setShow] = useState(false);
+    const handleClick = () => setShow(!show);
+
     const loading = false;
 
     return (
@@ -15,7 +20,7 @@ const Login = () => {
                 className="md:p-8 w-full max-w-md rounded-lg md:border border-gray-200 mx-4 shadow-sm"
             >
                 <div className="mb-4">
-                    <h1 className="font-bold text-2xl text-hoverGreen">Feasto</h1>
+                    <h1 className="font-bold text-2xl text-hoverGreen">FEASTO</h1>
                 </div>
                 <div className="mb-4">
                     <div className="relative">
@@ -36,7 +41,7 @@ const Login = () => {
                 <div className="mb-4">
                     <div className="relative">
                         <Input
-                            type="password"
+                            type={show ? "text" : "password"}
                             placeholder="Password"
                             name="password"
                             // value={input.password}
@@ -47,6 +52,15 @@ const Login = () => {
                         {/* {errors && (
                             <span className="text-xs text-red-500">{errors.password}</span>
                         )} */}
+                        <button
+                            className="absolute inset-y-0 right-0 flex items-center px-3 bg-slate-100 focus:outline-none"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleClick();
+                            }}
+                        >
+                            {show ? <ViewOffIcon /> : <ViewIcon />}
+                        </button>
                     </div>
                 </div>
                 <div className="mb-5">
