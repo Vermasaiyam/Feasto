@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <Button>Click me</Button>
+      <Button className='bg-green hover:bg-hoverGreen'>Click me</Button>
     </>
   )
 }
