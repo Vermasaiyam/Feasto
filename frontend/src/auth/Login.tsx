@@ -2,9 +2,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { Loader2, LockKeyhole, Mail } from "lucide-react"
+import { Link } from "react-router-dom"
 
 
 const Login = () => {
+    const loading = false;
+
     return (
         <div className="flex items-center justify-center min-h-screen">
             <form
@@ -47,18 +50,18 @@ const Login = () => {
                     </div>
                 </div>
                 <div className="mb-5">
-                    {/* {loading ? (
-                        <Button disabled className="w-full bg-orange hover:bg-hoverOrange">
+                    {loading ? (
+                        <Button disabled className="w-full bg-green hover:bg-hoverGreen">
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
                         </Button>
-                    ) : ( */}
+                    ) : (
                         <Button
                             type="submit"
                             className="w-full bg-green hover:bg-hoverGreen"
                         >
                             Login
                         </Button>
-                    {/* )} */}
+                    )}
                     <div className="mt-4 text-sm">
                         <div
                             // to="/forgot-password"
@@ -71,9 +74,9 @@ const Login = () => {
                 <Separator />
                 <p className="mt-4">
                     Don't have an account?{" "}
-                    {/* <Link to="/signup" className="text-blue-500">
+                    <Link to="/signup" className="text-blue-500">
                         Signup
-                    </Link> */}
+                    </Link>
                 </p>
             </form>
         </div>
