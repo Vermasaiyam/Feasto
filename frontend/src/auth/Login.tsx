@@ -5,11 +5,8 @@ import { Loader2, LockKeyhole, Mail } from "lucide-react"
 import { ChangeEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { LoginInputState } from "@/schema/userSchema"
 
-type LoginInputState = {
-    email: string;
-    password: string;
-}
 
 const Login = () => {
     const [show, setShow] = useState(false);
