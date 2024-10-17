@@ -45,7 +45,7 @@ const Login = () => {
                 onSubmit={loginSubmitHandler}
                 className="md:p-8 w-full max-w-md rounded-lg md:border border-gray-200 mx-4 shadow-sm"
             >
-                <div className="mb-4">
+                <div className="mb-4 text-center">
                     <h1 className="font-bold text-2xl text-hoverGreen">LOGIN</h1>
                 </div>
                 <div className="mb-4">
@@ -102,17 +102,17 @@ const Login = () => {
                             Login
                         </Button>
                     )}
-                    <div className="mt-4 text-sm">
+                    <div className="mt-4 text-sm text-right">
                         <Link
                             to="/forgot-password"
-                            className="text-sm text-right hover:text-blue-500 hover:underline"
+                            className="text-sm hover:text-blue-500 hover:underline"
                         >
                             Forgot Password
                         </Link>
                     </div>
                 </div>
                 <Separator />
-                <p className="mt-4">
+                <p className="mt-4 text-center">
                     Don't have an account?{" "}
                     <Link to="/signup" className="text-blue-500">
                         Signup

@@ -47,7 +47,7 @@ const Signup = () => {
                 onSubmit={signupSubmitHandler}
                 className="md:p-8 w-full max-w-md rounded-lg md:border border-gray-200 mx-4 shadow-sm"
             >
-                <div className="mb-4">
+                <div className="mb-4 text-center">
                     <h1 className="font-bold text-2xl text-hoverGreen">SIGNUP</h1>
                 </div>
                 <div className="mb-4">
@@ -136,7 +136,7 @@ const Signup = () => {
 
                 </div>
                 <Separator />
-                <p className="mt-4">
+                <p className="mt-4 text-center">
                     Already have an account?{" "}
                     <Link to="/login" className="text-blue-500">
                         Login
