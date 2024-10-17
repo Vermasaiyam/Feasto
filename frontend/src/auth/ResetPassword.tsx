@@ -21,7 +21,7 @@ const ResetPassword = () => {
                 </div>
                 <div className="relative w-full">
                     <Input
-                        type="password"
+                        type={show ? "text" : "password"}
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                         placeholder="Enter your new password"
