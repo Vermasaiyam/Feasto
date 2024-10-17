@@ -35,7 +35,7 @@ const ForgotPassword = () => {
                 }
                 <span className="text-center">
                     Back to{" "}
-                    <Link to="/login" className="text-blue-500">Login</Link>
+                    <Link to="/login" className="text-blue-500 hover:underline">Login</Link>
                 </span>
             </form>
         </div>
