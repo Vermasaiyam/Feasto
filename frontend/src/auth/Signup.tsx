@@ -59,6 +59,7 @@ const Signup = () => {
                             value={input.fullname}
                             onChange={changeEventHandler}
                             className="pl-10 focus-visible:ring-1"
+                            required
                         />
                         <User className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
                         {errors && <span className="text-xs text-red-500">{errors.fullname}</span>}
@@ -73,6 +74,7 @@ const Signup = () => {
                             value={input.email}
                             onChange={changeEventHandler}
                             className="pl-10 focus-visible:ring-1"
+                            required
                         />
                         <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
                         {errors && (
@@ -89,6 +91,7 @@ const Signup = () => {
                             value={input.contact}
                             onChange={changeEventHandler}
                             className="pl-10 focus-visible:ring-1"
+                            required
                         />
                         <PhoneOutgoing className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
                         {errors && <span className="text-xs text-red-500">{errors.contact}</span>}
@@ -103,6 +106,7 @@ const Signup = () => {
                             value={input.password}
                             onChange={changeEventHandler}
                             className="pl-10 focus-visible:ring-1"
+                            required
                         />
                         <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
                         {errors && (
