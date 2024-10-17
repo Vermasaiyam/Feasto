@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
@@ -28,6 +28,10 @@ const VerifyEmail = () => {
             inputRef.current[index - 1].focus();
         }
     };
+
+    useEffect(()=>{
+        inputRef.current[0].focus();
+    }, []);
 
     return (
         <div className="flex items-center justify-center h-screen w-full">
