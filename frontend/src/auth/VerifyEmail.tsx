@@ -1,9 +1,33 @@
 import { Input } from "@/components/ui/input";
-import { useState } from "react"
+import { useRef, useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
     const [val, setVal] = useState<string[]>(["", "", "", "", "", ""]);
+    const inputRef = useRef<any>([]);
+    const navigate = useNavigate();
 
+    const handleChange = (index: number, value: string) => {
+        if (/^[a-zA-Z0-9]$/.test(value) || value === "") {
+            const newOtp = [...val];
+            newOtp[index] = value;
+            setVal(newOtp);
+            if (value !== "" && index < 5) {
+                inputRef.current[index + 1].focus();
+            }
+        }
+        
+    }
+
+
+    const handleKeyDown = (
+        index: number,
+        e: React.KeyboardEvent<HTMLInputElement>
+    ) => {
+        if (e.key === "Backspace" && !val[index] && index > 0) {
+            inputRef.current[index - 1].focus();
+        }
+    };
 
     return (
         <div className="flex items-center justify-center h-screen w-full">
@@ -17,14 +41,19 @@ const VerifyEmail = () => {
                 <form action="">
                     <div className="flex justify-between">
                         {
-                            val.map((letter:string, index:number)=>{
+                            val.map((letter: string, index: number) => {
                                 return (
-                                    <Input 
+                                    <Input
                                         key={index}
+                                        ref={(element) => inputRef.current[index] = element}
                                         type="text"
                                         value={letter}
-                                        className="md:h-12 md:w-12 w-8 h-8 text-center text-sm md:text-2xl font-normal md:font-bold rounded-lg focus-outline-none focus-ring-2 focus:ring-indigo-500"
-                                        
+                                        className="md:h-12 md:w-12 w-8 h-8 text-center text-sm md:text-2xl font-normal md:font-semibold rounded-lg focus-outline-none focus-ring-2 focus:ring-indigo-500"
+                                        maxLength={1}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
+                                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                                            handleKeyDown(index, e)
+                                        }
                                     />
                                 )
                             })
