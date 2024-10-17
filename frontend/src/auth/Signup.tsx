@@ -5,12 +5,14 @@ import { Loader2, LockKeyhole, Mail, PhoneOutgoing, User } from "lucide-react"
 import { ChangeEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { SignupInputState } from "@/schema/userSchema"
+import { SignupInputState, userSignupSchema } from "@/schema/userSchema"
 
 
 const Signup = () => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
+    
+    const [errors, setErrors] = useState<Partial<SignupInputState>>({});
 
     const loading = false;
 
@@ -29,6 +31,13 @@ const Signup = () => {
     const signupSubmitHandler = async (e: FormEvent) => {
         e.preventDefault();
         console.log(input);
+
+        const result = userSignupSchema.safeParse(input);
+        if (!result.success){
+            const fieldErrors = result.error.formErrors.fieldErrors;
+            setErrors(fieldErrors as Partial<SignupInputState>);
+            return;
+        }
 
     };
 
@@ -52,7 +61,7 @@ const Signup = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <User className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && <span className="text-xs text-red-500">{errors.fullname}</span>} */}
+                        {errors && <span className="text-xs text-red-500">{errors.fullname}</span>}
                     </div>
                 </div>
                 <div className="mb-4">
@@ -66,9 +75,9 @@ const Signup = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && (
+                        {errors && (
                             <span className="text-xs text-red-500">{errors.email}</span>
-                        )} */}
+                        )}
                     </div>
                 </div>
                 <div className="mb-4">
@@ -82,7 +91,7 @@ const Signup = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <PhoneOutgoing className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && <span className="text-xs text-red-500">{errors.contact}</span>} */}
+                        {errors && <span className="text-xs text-red-500">{errors.contact}</span>}
                     </div>
                 </div>
                 <div className="mb-4">
@@ -96,11 +105,11 @@ const Signup = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && (
+                        {errors && (
                             <span className="text-xs text-red-500">{errors.password}</span>
-                        )} */}
+                        )}
                         <button
-                            className="absolute inset-y-0 right-0 flex items-center px-3 bg-slate-100 focus:outline-none"
+                            className="absolute inset-y-0 right-0 h-10 flex items-center px-3 bg-slate-100 focus:outline-none"
                             onClick={(e) => {
                                 e.preventDefault();
                                 handleClick();

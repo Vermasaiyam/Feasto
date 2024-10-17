@@ -5,12 +5,14 @@ import { Loader2, LockKeyhole, Mail } from "lucide-react"
 import { ChangeEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { LoginInputState } from "@/schema/userSchema"
+import { LoginInputState, userLoginSchema } from "@/schema/userSchema"
 
 
 const Login = () => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
+
+    const [errors, setErrors] = useState<Partial<LoginInputState>>({});
 
     const loading = false;
 
@@ -27,6 +29,13 @@ const Login = () => {
     const loginSubmitHandler = async (e: FormEvent) => {
         e.preventDefault();
         console.log(input);
+
+        const result = userLoginSchema.safeParse(input);
+        if (!result.success){
+            const fieldErrors = result.error.formErrors.fieldErrors;
+            setErrors(fieldErrors as Partial<LoginInputState>)
+            return;
+        }
         
     };
 
@@ -50,9 +59,9 @@ const Login = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && (
+                        {errors && (
                             <span className="text-xs text-red-500">{errors.email}</span>
-                        )} */}
+                        )}
                     </div>
                 </div>
                 <div className="mb-4">
@@ -66,11 +75,11 @@ const Login = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && (
+                        {errors && (
                             <span className="text-xs text-red-500">{errors.password}</span>
-                        )} */}
+                        )}
                         <button
-                            className="absolute inset-y-0 right-0 flex items-center px-3 bg-slate-100 focus:outline-none"
+                            className="absolute inset-y-0 right-0 h-10 flex items-center px-3 bg-slate-100 focus:outline-none"
                             onClick={(e) => {
                                 e.preventDefault();
                                 handleClick();
@@ -94,12 +103,12 @@ const Login = () => {
                         </Button>
                     )}
                     <div className="mt-4 text-sm">
-                        <div
-                            // to="/forgot-password"
+                        <Link
+                            to="/forgot-password"
                             className="text-sm text-right hover:text-blue-500 hover:underline"
                         >
                             Forgot Password
-                        </div>
+                        </Link>
                     </div>
                 </div>
                 <Separator />
