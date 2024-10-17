@@ -11,7 +11,7 @@ import { SignupInputState, userSignupSchema } from "@/schema/userSchema"
 const Signup = () => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
-    
+
     const [errors, setErrors] = useState<Partial<SignupInputState>>({});
 
     const loading = false;
@@ -33,7 +33,7 @@ const Signup = () => {
         console.log(input);
 
         const result = userSignupSchema.safeParse(input);
-        if (!result.success){
+        if (!result.success) {
             const fieldErrors = result.error.formErrors.fieldErrors;
             setErrors(fieldErrors as Partial<SignupInputState>);
             return;
@@ -105,8 +105,13 @@ const Signup = () => {
                             name="password"
                             value={input.password}
                             onChange={changeEventHandler}
-                            className="pl-10 focus-visible:ring-1"
+                            className="pl-10 focus-visible:ring-1 user-select-none"
                             required
+                            onCopy={(e) => e.preventDefault()}   // Disable copying
+                            onPaste={(e) => e.preventDefault()}  // Disable pasting
+                            onCut={(e) => e.preventDefault()}    // Disable cutting
+                            onDragStart={(e) => e.preventDefault()} // Disable dragging
+                            draggable={false}  // Disable drag events
                         />
                         <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
                         {errors && (
