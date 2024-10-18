@@ -1,11 +1,15 @@
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react"
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
     const [val, setVal] = useState<string[]>(["", "", "", "", "", ""]);
     const inputRef = useRef<any>([]);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+
+    const loading = false;
 
     const handleChange = (index: number, value: string) => {
         if (/^[a-zA-Z0-9]$/.test(value) || value === "") {
@@ -16,7 +20,7 @@ const VerifyEmail = () => {
                 inputRef.current[index + 1].focus();
             }
         }
-        
+
     }
 
 
@@ -29,7 +33,7 @@ const VerifyEmail = () => {
         }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         inputRef.current[0].focus();
     }, []);
 
@@ -63,6 +67,21 @@ const VerifyEmail = () => {
                             })
                         }
                     </div>
+                    {
+                        loading ? (
+                            <Button
+                                disabled
+                                className="bg-green hover:bg-hoverGreen mt-6 w-full"
+                            >
+                                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                                Please wait
+                            </Button>
+                        ) : (
+                            <Button className="bg-green hover:bg-hoverGreen mt-6 w-full">
+                                Verify
+                            </Button>
+                        )
+                    }
                 </form>
             </div>
         </div>
