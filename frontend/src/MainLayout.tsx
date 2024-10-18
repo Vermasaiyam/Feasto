@@ -1,8 +1,12 @@
+import Navbar from "./components/Navbar"
 
 
 const MainLayout = () => {
   return (
-    <div>MainLayout</div>
+    <div>
+      {/* MainLayout */}
+      <Navbar/>
+    </div>
   )
 }
 
