@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
+} from "@/components/ui/menubar"
 
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const admin: boolean = true;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -14,17 +22,36 @@ const Navbar = () => {
       <div className="container flex justify-between items-center mx-auto">
         {/* Logo */}
         <Link to={'/'} className="flex items-center">
-          <img src="/logo.png" alt="Feasto Logo" className="h-20 mr-0" />
-          <span className="font-bold text-xl text-hoverGreen">FEASTO</span>
+          <img src="/logo.png" alt="Feasto Logo" className="md:h-20 h-16 mr-0" />
+          <span className="md:font-bold md:text-xl font-semibold text-lg text-hoverGreen">FEASTO</span>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-4">
+        <div className="hidden md:flex space-x-4 items-center">
           <Link to="/" className="hover:text-hoverGreen font-medium">Home</Link>
-          <Link to="/" className="hover:text-hoverGreen  font-medium">Profile</Link>
-          <Link to="/" className="hover:text-hoverGreen  font-medium">Order</Link>
-          <Link to="/" className="hover:text-hoverGreen  font-medium">Foods</Link>
-          <Link to="/" className="hover:text-hoverGreen  font-medium">Restaurants</Link>
+          <Link to="/profile" className="hover:text-hoverGreen  font-medium">Profile</Link>
+          <Link to="/order/status" className="hover:text-hoverGreen  font-medium">Order</Link>
+          <Link to="/foods" className="hover:text-hoverGreen  font-medium">Foods</Link>
+          <Link to="/restaurants" className="hover:text-hoverGreen  font-medium">Restaurants</Link>
+
+          {admin && (
+            <Menubar>
+              <MenubarMenu>
+                <MenubarTrigger className="cursor-pointer">Dashboard</MenubarTrigger>
+                <MenubarContent>
+                  <Link to="/admin/restaurant">
+                    <MenubarItem className="cursor-pointer">Restaurant</MenubarItem>
+                  </Link>
+                  <Link to="/admin/menu">
+                    <MenubarItem className="cursor-pointer">Menu</MenubarItem>
+                  </Link>
+                  <Link to="/admin/orders">
+                    <MenubarItem className="cursor-pointer">Orders</MenubarItem>
+                  </Link>
+                </MenubarContent>
+              </MenubarMenu>
+            </Menubar>
+          )}
         </div>
 
         {/* Right-side buttons */}
@@ -78,25 +105,34 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="flex w-[100%] justify-end">
           <div
-            className={`fixed top-20 right-0 h-screen bg-white w-[40vw] md:hidden shadow-lg transition-transform duration-500 ease-in-out transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+            className={`fixed md:top-20 top-14 right-0 h-screen bg-white w-[40vw] md:hidden shadow-lg transition-transform duration-500 ease-in-out transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
               }`}
           >
-            <div className="flex flex-col items-end px-4 space-y-2 mt-4">
-              <Link to="/" className="hover:text-hoverGreen font-medium self-end">
-                Home
-              </Link>
-              <Link to="/" className="hover:text-hoverGreen font-medium self-end">
-                Profile
-              </Link>
-              <Link to="/" className="hover:text-hoverGreen font-medium self-end">
-                Order
-              </Link>
-              <Link to="/" className="hover:text-hoverGreen font-medium self-end">
-                Foods
-              </Link>
-              <Link to="/" className="hover:text-hoverGreen font-medium self-end">
-                Restaurants
-              </Link>
+            <div className="flex flex-col gap-2 items-end px-4 space-y-2 mt-4">
+              <Link to="/" className="hover:text-hoverGreen font-medium">Home</Link>
+              <Link to="/profile" className="hover:text-hoverGreen  font-medium">Profile</Link>
+              <Link to="/order/status" className="hover:text-hoverGreen  font-medium">Order</Link>
+              <Link to="/foods" className="hover:text-hoverGreen  font-medium">Foods</Link>
+              <Link to="/restaurants" className="hover:text-hoverGreen  font-medium">Restaurants</Link>
+
+              {admin && (
+                <Menubar>
+                  <MenubarMenu>
+                    <MenubarTrigger className="cursor-pointer">Dashboard</MenubarTrigger>
+                    <MenubarContent>
+                      <Link to="/admin/restaurant">
+                        <MenubarItem className="cursor-pointer">Restaurant</MenubarItem>
+                      </Link>
+                      <Link to="/admin/menu">
+                        <MenubarItem className="cursor-pointer">Menu</MenubarItem>
+                      </Link>
+                      <Link to="/admin/orders">
+                        <MenubarItem className="cursor-pointer">Orders</MenubarItem>
+                      </Link>
+                    </MenubarContent>
+                  </MenubarMenu>
+                </Menubar>
+              )}
             </div>
 
             <div className="flex space-x-4 px-4 mt-4 justify-end w-full">
