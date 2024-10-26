@@ -8,12 +8,14 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar"
 import { Button } from "./ui/button";
-import { HandPlatter, Loader2, Menu, Moon, PackageCheck, ShoppingCart, SquareMenu, Sun, User, UtensilsCrossed } from "lucide-react";
+import { HandPlatter, Loader2, LogOut, Menu, Moon, PackageCheck, ShoppingCart, SquareMenu, Sun, User, User2, UtensilsCrossed } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 // import InitialsAvatar from 'react-initials-avatar';
@@ -33,8 +35,8 @@ import { Separator } from "./ui/separator";
 
 const Navbar = () => {
   const admin: boolean = true;
-  const loading: boolean = false;
-  const cart = [1,2,3];
+  // const loading: boolean = false;
+  const cart = [1, 2, 3];
 
   return (
     <nav className="bg-white px-4 shadow-sm">
@@ -46,12 +48,12 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex space-x-4 items-center">
+        <div className="hidden lg:flex space-x-6 items-center">
           <Link to="/" className="hover:text-hoverGreen font-medium">Home</Link>
-          <Link to="/profile" className="hover:text-hoverGreen  font-medium">Profile</Link>
-          <Link to="/order/status" className="hover:text-hoverGreen  font-medium">Order</Link>
+          {/* <Link to="/profile" className="hover:text-hoverGreen  font-medium">Profile</Link> */}
           <Link to="/menu" className="hover:text-hoverGreen  font-medium">Menu</Link>
           <Link to="/restaurants" className="hover:text-hoverGreen  font-medium">Restaurant</Link>
+          <Link to="/order/status" className="hover:text-hoverGreen  font-medium">Order</Link>
 
           {admin && (
             <Menubar>
@@ -104,26 +106,33 @@ const Navbar = () => {
             </DropdownMenu>
           </div>
 
-          <Link to={'/profile'}>
-            <Avatar>
-              <AvatarImage src="" alt="profilephoto" />
-              <AvatarFallback>SV</AvatarFallback>
-            </Avatar>
-          </Link>
           <div>
-            {loading ? (
-              <Button className="bg-green hover:bg-hoverGreen">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </Button>
-            ) : (
-              <Button
-                // onClick={logout}
-                className="bg-green hover:bg-hoverGreen"
-              >
-                Logout
-              </Button>
-            )}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src="" alt="profilephoto" />
+                  <AvatarFallback>SV</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel className="">My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link to={'/profile'} className='flex w-fit items-center gap-2 cursor-pointer'>
+                    <User2 />
+                    <Button variant="ghost">View Profile</Button>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <div className='flex w-fit items-center gap-2 cursor-pointer'>
+                    <LogOut />
+                    <Button variant="ghost">Logout</Button>
+                  </div>
+                </DropdownMenuItem>
+
+              </DropdownMenuContent>
+            </DropdownMenu>
+
           </div>
         </div>
 
@@ -144,7 +153,7 @@ const MobileNavbar = () => {
 
   const admin: boolean = true;
   const loading: boolean = false;
-  const cart = [1,2,3];
+  const cart = [1, 2, 3];
 
   return (
     <Sheet>
