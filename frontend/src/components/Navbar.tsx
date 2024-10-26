@@ -37,7 +37,7 @@ const Navbar = () => {
   const cart = [1,2,3];
 
   return (
-    <nav className="bg-white px-4">
+    <nav className="bg-white px-4 shadow-sm">
       <div className="container flex justify-between items-center mx-auto">
         {/* Logo */}
         <Link to={'/'} className="flex items-center">
