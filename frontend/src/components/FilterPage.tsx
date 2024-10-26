@@ -16,7 +16,7 @@ const filterOptions: FilterOptionsState[] = [
 
 const FilterPage = () => {
     return (
-        <div className="md:w-72">
+        <div className="md:w-72 mx-2">
             <div className="flex items-center justify-between">
                 <h1 className="font-medium text-lg">Filter by cuisines</h1>
                 <Button variant={"link"}>Reset</Button>
