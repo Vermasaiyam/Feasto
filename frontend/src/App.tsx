@@ -7,6 +7,7 @@ import ResetPassword from './auth/ResetPassword'
 import VerifyEmail from './auth/VerifyEmail'
 import LandingPage from './components/LandingPage'
 import Profile from './components/Profile'
+import UnderConstruction from './components/UnderConstruction'
 
 const appRouter = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/search/:id",
         element: <Profile />
+      },
+      {
+        path: '*',
+        element: <UnderConstruction />
       },
     ]
   },
@@ -46,6 +51,10 @@ const appRouter = createBrowserRouter([
   {
     path: '/verify-email',
     element: <VerifyEmail />
+  },
+  {
+    path: '*',
+    element: <UnderConstruction />
   },
 ])
 
