@@ -51,7 +51,7 @@ const Profile = () => {
         }
     };
 
-    const updateProfileHandler = async (e: FormEvent<HTMLFormElement>) => {
+    const updateProfileHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setIsLoading(true);
@@ -67,7 +67,7 @@ const Profile = () => {
             <div className="flex items-center justify-between ml-4">
                 <div className="flex items-center gap-2">
                     <Avatar className="relative md:w-28 md:h-28 w-20 h-20">
-                        <AvatarImage src="" />
+                        <AvatarImage src={selectedProfilePicture} />
                         <AvatarFallback>SV</AvatarFallback>
                         <input
                             ref={imageRef}
