@@ -1,16 +1,17 @@
 import { Timer } from "lucide-react"
 import { Badge } from "./ui/badge"
+import Menu from "./Menu"
 
 
 const RestaurantPage = () => {
     return (
-        <div className="max-w-6xl mx-auto my-10">
-            <div className="w-full">
+        <div className="max-w-6xl mx-auto my-10 min-h-[60vh]">
+            <div className="w-full mx-2">
                 <div className="relative w-full h-32 md:h-64 lg:h-72">
                     <img
                         // src={singleRestaurant?.imageUrl || "Loading..."}
                         src="bg.png"
-                        alt="res_image"
+                        alt="Restaurant Cover Image"
                         className="object-cover w-full h-full rounded-lg shadow-lg"
                     />
                 </div>
@@ -39,7 +40,11 @@ const RestaurantPage = () => {
                         </div>
                     </div>
                 </div>
-                {/* {singleRestaurant?.menus && <AvailableMenu menus={singleRestaurant?.menus!} />} */}
+                {/* {
+                    singleRestaurant?.menus &&
+                    <AvailableMenu menus={singleRestaurant?.menus!} />
+                } */}
+                <Menu />
             </div>
         </div>
     )
