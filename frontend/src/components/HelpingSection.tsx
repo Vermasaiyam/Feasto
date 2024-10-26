@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingCart,  Award } from 'lucide-react';
+import { ShoppingCart,  Award, Truck } from 'lucide-react';
 
 interface Props {
   title: string;
@@ -27,7 +27,7 @@ const HelpingSection = () => {
     },
     {
       title: 'Fastest Delivery',
-      icon: <ShoppingCart className="h-12 w-12 text-green-500" />,
+      icon: <Truck className="h-12 w-12 text-green-500" />,
       description:
         'Experience the fastest delivery with our reliable and efficient service.',
     },
