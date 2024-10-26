@@ -11,6 +11,7 @@ import {
     TableRow,
 } from "./ui/table";
 import { useState } from "react";
+import CheckoutPage from "./CheckoutPage";
 
 const Cart = () => {
     const [open, setOpen] = useState<boolean>(false);
@@ -101,7 +102,7 @@ const Cart = () => {
                     Proceed To Checkout
                 </Button>
             </div>
-            {/* <CheckoutConfirmPage open={open} setOpen={setOpen} /> */}
+            <CheckoutPage open={open} setOpen={setOpen} />
         </div>
     )
 }
