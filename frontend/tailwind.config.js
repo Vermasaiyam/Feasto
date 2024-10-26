@@ -15,6 +15,7 @@ module.exports = {
 				darkGreen: 'var(--heading)',
 				green: 'var(--button)',
 				hoverGreen: 'var(--hoverButton)',
+				lightGreen: 'var(--bgColor)',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {

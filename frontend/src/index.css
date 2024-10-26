@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* *,
+*::before,
+*::after {
+  box-sizing: border-box;
+} */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -32,6 +37,7 @@
     --heading: #374f4d;
     --button: #548776;
     --hoverButton: #456960;
+    --bgColor: #E6E8DD;
   }
   .dark {
     --background: 222.2 84% 4.9%;
