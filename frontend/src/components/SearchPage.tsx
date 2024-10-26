@@ -15,8 +15,8 @@ const SearchPage = () => {
     const loading: boolean = false;
 
     return (
-        <div className="max-w-7xl mx-auto my-10">
-            <div className="flex flex-col md:flex-row justify-between gap-10">
+        <div className="max-w-7xl mx-auto my-10 min-h-[60vh]">
+            <div className="flex flex-col md:flex-row justify-between gap-12">
                 <FilterPage />
                 <div className="flex-1 mx-4">
                     {/* Search Input Field  */}
