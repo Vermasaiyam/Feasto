@@ -60,7 +60,7 @@ const Footer = () => {
             </div>
             <div className="bg-white text-center text-gray-300 md:py-5 py-4 px-4">
                 <p className="text-sm text-hoverGreen">
-                    Copyright &copy; 2021 <span className="text-hoverGreen font-bold">FEASTO</span>.
+                    Copyright &copy; 2024 <span className="text-hoverGreen font-bold">FEASTO</span>.
                 </p>
             </div>
         </footer>
