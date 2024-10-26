@@ -6,6 +6,17 @@
 *::after {
   box-sizing: border-box;
 } */
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 0.4rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c7c7c7;
+  border-radius: 1rem;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -39,6 +50,7 @@
     --hoverButton: #456960;
     --bgColor: #E6E8DD;
   }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -66,10 +78,12 @@
     --chart-5: 340 75% 55%
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
