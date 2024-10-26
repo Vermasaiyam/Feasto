@@ -1,4 +1,5 @@
 import Footer from "./components/Footer"
+import HelpingSection from "./components/HelpingSection"
 import LandingPage from "./components/LandingPage"
 import Navbar from "./components/Navbar"
 
@@ -8,6 +9,7 @@ const MainLayout = () => {
     <div>
       <Navbar/>
       <LandingPage/>
+      <HelpingSection/>
       <Footer/>
     </div>
   )
