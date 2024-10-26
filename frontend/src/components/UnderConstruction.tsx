@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const UnderConstruction = () => {
     return (
@@ -6,12 +7,10 @@ const UnderConstruction = () => {
             <p className="text-base md:text-lg text-gray-600 max-w-md">
                 This page is currently under construction. Please check back later!
             </p>
-            <button
-                onClick={() => window.history.back()}
-                className="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md"
+            <Link to={'/'} className="mt-6 bg-green hover:bg-hoverGreen text-white font-semibold py-2 px-4 rounded-md"
             >
                 Go Back
-            </button>
+            </Link>
         </div>
     );
 };
