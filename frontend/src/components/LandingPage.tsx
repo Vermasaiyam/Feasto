@@ -28,7 +28,7 @@ const LandingPage = () => {
                         className="pl-10 shadow-lg"
                     />
                     <Search className="text-gray-500 absolute inset-y-2 left-2" />
-                    <Button onClick={() => navigate(`/search/${searchText}`)} className="px-2 md:py-1.5 py-2 md:text-base text-sm text-white shadow-lg bg-green hover:bg-hoverGreen">Search</Button>
+                    <Button onClick={() => navigate(`/search/${searchText}`)} className="px-2 md:py-1.5 py-2 md:text-base text-sm text-white shadow-lg bg-green hover:bg-hoverGreen rounded-sm">Search</Button>
                 </div>
             </div>
             <div className="flex-1 flex items-center justify-center">
