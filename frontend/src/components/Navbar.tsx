@@ -104,12 +104,12 @@ const Navbar = () => {
             </DropdownMenu>
           </div>
 
-          <div>
+          <Link to={'/profile'}>
             <Avatar>
               <AvatarImage src="" alt="profilephoto" />
               <AvatarFallback>SV</AvatarFallback>
             </Avatar>
-          </div>
+          </Link>
           <div>
             {loading ? (
               <Button className="bg-green hover:bg-hoverGreen">
@@ -224,13 +224,13 @@ const MobileNavbar = () => {
           )}
         </SheetDescription>
         <SheetFooter className="flex flex-col gap-4">
-          <div className="flex flex-row items-center gap-2">
+          <Link to={'/profile'} className="flex flex-row items-center gap-2">
             <Avatar>
               <AvatarImage src="" />
               <AvatarFallback>SV</AvatarFallback>
             </Avatar>
             <h1 className="font-bold">Saiyam Verma</h1>
-          </div>
+          </Link>
           <SheetClose asChild>
             {loading ? (
               <Button className="bg-green hover:bg-hoverGreen">
