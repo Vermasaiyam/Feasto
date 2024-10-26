@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Mail, X } from "lucide-react";
+import { Github, Instagram, Linkedin, Mail, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -14,17 +14,20 @@ const Footer = () => {
                         Satisfy Your Cravings with a Click!
                     </p>
                     <div className="flex flex-row gap-2 w-full items-center justify-center">
-                        <Link to={"https://www.instagram.com/s.verma0504/"} target="blank" className="bg-white p-1.5 rounded-full flex items-center justify-center">
-                            <Instagram className="w-5 h-5"  />
-                        </Link>
-                        <Link to={"https://x.com/SaiyamVerm91813/"} target="blank" className="bg-white p-1.5 rounded-full flex items-center justify-center">
-                            <X className="w-5 h-5"  />
+                        <Link to={"https://github.com/Vermasaiyam"} target="blank" className="bg-white p-1.5 rounded-full flex items-center justify-center">
+                            <Github className="w-5 h-5" />
                         </Link>
                         <Link to={"https://www.linkedin.com/in/saiyam05/"} target="blank" className="bg-white p-1.5 rounded-full flex items-center justify-center">
-                            <Linkedin className="w-5 h-5"  />
+                            <Linkedin className="w-5 h-5" />
+                        </Link>
+                        <Link to={"https://x.com/SaiyamVerm91813/"} target="blank" className="bg-white p-1.5 rounded-full flex items-center justify-center">
+                            <X className="w-5 h-5" />
+                        </Link>
+                        <Link to={"https://www.instagram.com/s.verma0504/"} target="blank" className="bg-white p-1.5 rounded-full flex items-center justify-center">
+                            <Instagram className="w-5 h-5" />
                         </Link>
                         <Link to={"mailto:vermasaiyam9@gmail.com"} target="blank" className="bg-white p-1.5 rounded-full flex items-center justify-center">
-                            <Mail className="w-5 h-5"  />
+                            <Mail className="w-5 h-5" />
                         </Link>
                     </div>
                 </div>
