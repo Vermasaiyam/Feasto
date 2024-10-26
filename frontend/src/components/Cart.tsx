@@ -76,7 +76,7 @@ const Cart = () => {
                                 {500 * 2}
                             </TableCell>
                             <TableCell className="text-right">
-                                <Button size={"sm"} variant={"outline"} className="hover:text-white border border-green hover:bg-green">
+                                <Button size={"sm"} variant={"outline"} className="hover:text-white text-green border border-green hover:bg-green">
                                     Remove
                                 </Button>
                             </TableCell>
