@@ -1,47 +1,56 @@
 import Login from './auth/Login'
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import MainLayout from './MainLayout'
 import Signup from './auth/Signup'
 import ForgotPassword from './auth/ForgotPassword'
 import ResetPassword from './auth/ResetPassword'
 import VerifyEmail from './auth/VerifyEmail'
+import LandingPage from './components/LandingPage'
+import Profile from './components/Profile'
 
 const appRouter = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout/>,
-    // children: [
-    //   {
-    //     path: '/login'
-    //   }
-    // ]
+    element: <MainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <LandingPage />
+      },
+      {
+        path: "/profile",
+        element: <Profile />
+      },
+    ]
   },
   {
     path: '/login',
-    element: <Login/>
+    element: <Login />
   },
   {
     path: '/signup',
-    element: <Signup/>
+    element: <Signup />
   },
   {
     path: '/forgot-password',
-    element: <ForgotPassword/>
+    element: <ForgotPassword />
   },
   {
     path: '/reset-password',
-    element: <ResetPassword/>
+    element: <ResetPassword />
   },
   {
     path: '/verify-email',
-    element: <VerifyEmail/>
+    element: <VerifyEmail />
   },
 ])
 
 function App() {
 
   return (
-    <RouterProvider router={appRouter} />
+    <main>
+      <RouterProvider router={appRouter}></RouterProvider>
+    </main>
   )
 }
 

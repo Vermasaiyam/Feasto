@@ -1,16 +1,23 @@
+import { Outlet } from "react-router-dom"
 import Footer from "./components/Footer"
-import HelpingSection from "./components/HelpingSection"
-import LandingPage from "./components/LandingPage"
 import Navbar from "./components/Navbar"
 
 
 const MainLayout = () => {
   return (
-    <div>
-      <Navbar/>
-      <LandingPage/>
-      <HelpingSection/>
-      <Footer/>
+    <div className="flex flex-col min-h-screen">
+      <header>
+        <Navbar />
+      </header>
+      {/* Main content  */}
+      <div className="flex-1">
+        <Outlet />
+      </div>
+
+      {/* Footer  */}
+      <footer>
+        <Footer />
+      </footer>
     </div>
   )
 }
