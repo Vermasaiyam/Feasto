@@ -46,7 +46,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-4 items-center">
+        <div className="hidden lg:flex space-x-4 items-center">
           <Link to="/" className="hover:text-hoverGreen font-medium">Home</Link>
           <Link to="/profile" className="hover:text-hoverGreen  font-medium">Profile</Link>
           <Link to="/order/status" className="hover:text-hoverGreen  font-medium">Order</Link>
@@ -74,7 +74,7 @@ const Navbar = () => {
         </div>
 
         {/* Right-side buttons */}
-        <div className="hidden md:flex space-x-4 items-center">
+        <div className="hidden lg:flex space-x-4 items-center">
 
           <Link to="/cart" className="relative cursor-pointer">
             <ShoppingCart />
@@ -127,7 +127,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="md:hidden lg:hidden">
+        <div className="lg:hidden">
           <MobileNavbar />
         </div>
       </div>
