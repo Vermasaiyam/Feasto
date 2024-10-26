@@ -10,6 +10,7 @@ import Profile from './components/Profile'
 import UnderConstruction from './components/UnderConstruction'
 import SearchPage from './components/SearchPage'
 import RestaurantPage from './components/RestaurantPage'
+import Cart from './components/Cart'
 
 const appRouter = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:id",
         element: <RestaurantPage />
+      },
+      {
+        path: "/cart",
+        element: <Cart />
       },
       {
         path: '*',
