@@ -7,11 +7,24 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar"
+import { Button } from "./ui/button";
+import { Loader2, Moon, ShoppingCart, Sun } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+// import InitialsAvatar from 'react-initials-avatar';
+
 
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const admin: boolean = true;
+  const loading: boolean = false;
+  const cart = [];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -55,17 +68,57 @@ const Navbar = () => {
         </div>
 
         {/* Right-side buttons */}
-        <div className="hidden md:flex space-x-4">
-          <button className="bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
-          <button className="bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
+        <div className="hidden md:flex space-x-4 items-center">
+
+          <Link to="/cart" className="relative cursor-pointer">
+            <ShoppingCart />
+            {cart.length > 0 && (
+              <Button
+                size={"icon"}
+                className="absolute -inset-y-3 left-4 -top-2 text-xs rounded-full w-4 h-4 bg-red-500 hover:bg-red-500"
+              >
+                {cart.length}
+              </Button>
+            )}
+          </Link>
+
+          <div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                  <span className="sr-only">Toggle theme</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem >Light</DropdownMenuItem>
+                <DropdownMenuItem >Dark</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          <div>
+            <Avatar>
+              <AvatarImage src="" alt="profilephoto" />
+              <AvatarFallback>SV</AvatarFallback>
+            </Avatar>
+          </div>
+          <div>
+            {loading ? (
+              <Button className="bg-green hover:bg-hoverGreen">
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </Button>
+            ) : (
+              <Button
+                // onClick={logout}
+                className="bg-green hover:bg-hoverGreen"
+              >
+                Logout
+              </Button>
+            )}
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
