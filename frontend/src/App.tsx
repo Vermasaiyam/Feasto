@@ -9,6 +9,7 @@ import LandingPage from './components/LandingPage'
 import Profile from './components/Profile'
 import UnderConstruction from './components/UnderConstruction'
 import SearchPage from './components/SearchPage'
+import RestaurantPage from './components/RestaurantPage'
 
 const appRouter = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/search/:id",
         element: <SearchPage />
+      },
+      {
+        path: "/restaurant/:id",
+        element: <RestaurantPage />
       },
       {
         path: '*',
