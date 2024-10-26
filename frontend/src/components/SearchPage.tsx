@@ -18,7 +18,7 @@ const SearchPage = () => {
         <div className="max-w-7xl mx-auto my-10">
             <div className="flex flex-col md:flex-row justify-between gap-10">
                 <FilterPage />
-                <div className="flex-1">
+                <div className="flex-1 mx-4">
                     {/* Search Input Field  */}
                     <div className="flex items-center gap-2">
                         <Input
