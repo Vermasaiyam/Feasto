@@ -25,7 +25,7 @@ const LandingPage = () => {
                         <Input
                             type="text"
                             value={searchText}
-                            placeholder="Search restaurant by name, city & country"
+                            placeholder="Search restaurant by name, city or country."
                             onChange={(e) => setSearchText(e.target.value)}
                             className="pl-10 shadow-lg"
                         />
