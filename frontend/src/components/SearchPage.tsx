@@ -199,7 +199,7 @@ const NoResultFound = ({ searchText }: { searchText: string }) => {
                 with a different term.
             </p>
             <Link to="/">
-                <Button className="mt-4 bg-green hover:bg-greenHover">
+                <Button className="mt-4 bg-green hover:bg-hoverGreen">
                     Go Back to Home
                 </Button>
             </Link>
