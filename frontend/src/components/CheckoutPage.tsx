@@ -46,13 +46,12 @@ const CheckoutPage = ({
     };
     const checkoutHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // api implementation start from here
 
     };
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent>
+            <DialogContent className="ml-2 mr-4">
                 <DialogTitle className="font-bold text-2xl">Review Your Order</DialogTitle>
                 <DialogDescription className="text-sm">
                     Review your order details carefully to make sure everything is correct!!!
