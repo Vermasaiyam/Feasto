@@ -136,10 +136,10 @@ const AddMenu = () => {
                 </Dialog>
             </div>
             {["momos", 'biryani', "paneer"].map((menu: string, idx: number) => (
-                <div key={idx} className="mt-6 space-y-4 hover:shadow-sm">
+                <div key={idx} className="mt-6 space-y-4 hover:shadow-lg">
                     <div className="flex flex-col md:flex-row md:items-center md:space-x-4 md:p-4 p-2 shadow-md rounded-lg border">
                         <img
-                            src=""
+                            src="https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141352.jpg"
                             alt="Item Image"
                             className="md:h-24 md:w-24 h-16 w-full object-cover rounded-lg"
                         />
