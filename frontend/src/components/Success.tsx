@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 const Success = () => {
 
-    const orders = [];
+    const orders = [1,];
 
     if (orders.length === 0)
         return (
