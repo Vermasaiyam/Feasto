@@ -4,6 +4,25 @@ import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 
 const Success = () => {
+
+    const orders = [];
+
+    if (orders.length === 0)
+        return (
+            <div className="flex flex-col gap-4 items-center justify-center min-h-[90vh] mx-2">
+                <div className="flex items-center justify-center w-full">
+                    <h1 className="font-bold text-2xl text-gray-700 dark:text-gray-300">
+                        You haven't placed any orders yet. Start your first order now!
+                    </h1>
+                </div>
+                <Link to="/cart">
+                    <Button className="bg-green hover:bg-hoverGreen w-full py-3 rounded-md shadow-lg">
+                        Order Now
+                    </Button>
+                </Link>
+            </div>
+        );
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 px-4">
             <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 max-w-lg w-full">
@@ -18,7 +37,7 @@ const Success = () => {
                         Order Summary
                     </h2>
                     {/* Your Ordered Item Display here  */}
-                    {[1, 2,3].map((order: any, index: number) => (
+                    {[1, 2, 3].map((order: any, index: number) => (
                         <div key={index}>
                             {[1, 2].map((item) => (
                                 <div className="mb-4">
