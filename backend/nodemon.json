@@ -1,7 +1,0 @@
-{
-    "exec": "ts-node --esm",
-    "watch": [
-        "*.ts"
-    ],
-    "ext": "ts,json"
-}
