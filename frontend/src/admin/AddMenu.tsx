@@ -37,103 +37,104 @@ const AddMenu = () => {
 
     return (
         <div className="max-w-6xl mx-auto my-10">
-            <div className="flex justify-between">
+            <div className="flex justify-between mx-2">
                 <h1 className="font-bold md:font-extrabold text-lg md:text-2xl">
                     My Menu
                 </h1>
                 <Dialog open={open} onOpenChange={setOpen}>
-                    <DialogTrigger>
-                        <Button className="bg-green hover:bg-hoverGreen">
-                            <Plus className="mr-2" />
-                            Add Item
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Add A New Item</DialogTitle>
-                            <DialogDescription>
-                                Design a menu that will make your restaurant unforgettable.
-                            </DialogDescription>
-                        </DialogHeader>
-                        <form onSubmit={submitHandler} className="space-y-4">
-                            <div>
-                                <Label>Name</Label>
-                                <Input
-                                    type="text"
-                                    name="name"
-                                    value={input.name}
-                                    onChange={changeEventHandler}
-                                    placeholder="Enter item name"
-                                />
-                                {/* {error && (
+                        <DialogTrigger>
+                            <Button className="bg-green hover:bg-hoverGreen">
+                                <Plus className="mr-2" />
+                                Add Item
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Add A New Item</DialogTitle>
+                                <DialogDescription>
+                                    Design a menu that will make your restaurant unforgettable.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <form onSubmit={submitHandler} className="space-y-4">
+                                <div>
+                                    <Label>Name</Label>
+                                    <Input
+                                        type="text"
+                                        name="name"
+                                        value={input.name}
+                                        onChange={changeEventHandler}
+                                        placeholder="Enter item name"
+                                    />
+                                    {/* {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.name}
                                     </span>
                                 )} */}
-                            </div>
-                            <div>
-                                <Label>Description</Label>
-                                <Input
-                                    type="text"
-                                    name="description"
-                                    value={input.description}
-                                    onChange={changeEventHandler}
-                                    placeholder="Enter item description"
-                                />
-                                {/* {error && (
+                                </div>
+                                <div>
+                                    <Label>Description</Label>
+                                    <Input
+                                        type="text"
+                                        name="description"
+                                        value={input.description}
+                                        onChange={changeEventHandler}
+                                        placeholder="Enter item description"
+                                    />
+                                    {/* {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.description}
                                     </span>
                                 )} */}
-                            </div>
-                            <div>
-                                <Label>Price</Label>
-                                <Input
-                                    type="number"
-                                    name="price"
-                                    value={input.price}
-                                    onChange={changeEventHandler}
-                                    placeholder="Enter item price"
-                                />
-                                {/* {error && (
+                                </div>
+                                <div>
+                                    <Label>Price</Label>
+                                    <Input
+                                        type="number"
+                                        name="price"
+                                        value={input.price}
+                                        onChange={changeEventHandler}
+                                        placeholder="Enter item price"
+                                    />
+                                    {/* {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.price}
                                     </span>
                                 )} */}
-                            </div>
-                            <div>
-                                <Label>Upload Menu Image</Label>
-                                <Input
-                                    type="file"
-                                    name="image"
-                                // onChange={(e) =>
-                                //     setInput({
-                                //         ...input,
-                                //         image: e.target.files?.[0] || undefined,
-                                //     })
-                                // }
-                                />
-                                {/* {error && (
+                                </div>
+                                <div>
+                                    <Label>Upload Menu Image</Label>
+                                    <Input
+                                        type="file"
+                                        name="image"
+                                    // onChange={(e) =>
+                                    //     setInput({
+                                    //         ...input,
+                                    //         image: e.target.files?.[0] || undefined,
+                                    //     })
+                                    // }
+                                    />
+                                    {/* {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.image?.name}
                                     </span>
                                 )} */}
-                            </div>
-                            <DialogFooter className="mt-5">
-                                {loading ? (
-                                    <Button disabled className="bg-green hover:bg-hoverGreen">
-                                        <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                                        Please wait
-                                    </Button>
-                                ) : (
-                                    <Button className="bg-green hover:bg-hoverGreen">
-                                        Submit
-                                    </Button>
-                                )}
-                            </DialogFooter>
-                        </form>
-                    </DialogContent>
+                                </div>
+                                <DialogFooter className="mt-5">
+                                    {loading ? (
+                                        <Button disabled className="w-full bg-green hover:bg-hoverGreen">
+                                            <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                                            Please wait
+                                        </Button>
+                                    ) : (
+                                        <Button className="w-full bg-green hover:bg-hoverGreen">
+                                            Submit
+                                        </Button>
+                                    )}
+                                </DialogFooter>
+                            </form>
+                        </DialogContent>
                 </Dialog>
+
             </div>
             {["momos", 'biryani', "paneer"].map((menu: string, idx: number) => (
                 <div key={idx} className="mt-6 space-y-4 hover:shadow-lg">
