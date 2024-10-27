@@ -12,6 +12,7 @@ import SearchPage from './components/SearchPage'
 import RestaurantPage from './components/RestaurantPage'
 import Cart from './components/Cart'
 import Restaurant from './admin/Restaurant'
+import AddMenu from './admin/AddMenu'
 
 const appRouter = createBrowserRouter([
   {
@@ -44,6 +45,12 @@ const appRouter = createBrowserRouter([
         element: <Restaurant />
       },
       {
+        path: "/admin/menu",
+        element: <AddMenu />
+      },
+
+      // Under construction page
+      {
         path: '*',
         element: <UnderConstruction />
       },
@@ -69,6 +76,7 @@ const appRouter = createBrowserRouter([
     path: '/verify-email',
     element: <VerifyEmail />
   },
+  // Under construction page
   {
     path: '*',
     element: <UnderConstruction />
