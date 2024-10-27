@@ -12,7 +12,6 @@ import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import {
   Dispatch,
-  FormEvent,
   SetStateAction,
   useEffect,
   useState,
@@ -35,7 +34,7 @@ const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, 
     setInput({ ...input, [name]: type === "number" ? Number(value) : value });
   };
 
-  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // const result = menuSchema.safeParse(input);
     // if (!result.success) {
@@ -44,8 +43,16 @@ const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, 
     //   return;
     // }
 
-
   }
+
+  useEffect(() => {
+    setInput({
+      name: selectedMenu?.name || "",
+      description: selectedMenu?.description || "",
+      price: selectedMenu?.price || 0,
+      image: undefined,
+    });
+  }, [selectedMenu]); 
 
 
   return (
