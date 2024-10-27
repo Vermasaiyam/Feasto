@@ -61,10 +61,10 @@ const Navbar = () => {
                 <MenubarTrigger className="cursor-pointer">Dashboard</MenubarTrigger>
                 <MenubarContent>
                   <Link to="/admin/restaurant">
-                    <MenubarItem className="cursor-pointer">Your Restaurant</MenubarItem>
+                    <MenubarItem className="cursor-pointer">My Restaurant</MenubarItem>
                   </Link>
                   <Link to="/admin/menu">
-                    <MenubarItem className="cursor-pointer">Menu</MenubarItem>
+                    <MenubarItem className="cursor-pointer">My Menu</MenubarItem>
                   </Link>
                   <Link to="/admin/orders">
                     <MenubarItem className="cursor-pointer">Orders</MenubarItem>
@@ -213,14 +213,14 @@ const MobileNavbar = () => {
                 className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
               >
                 <SquareMenu />
-                <span>Menu</span>
+                <span>My Menu</span>
               </Link>
               <Link
                 to="/admin/restaurant"
                 className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
               >
                 <UtensilsCrossed />
-                <span>Your Restaurant</span>
+                <span>My Restaurant</span>
               </Link>
               <Link
                 to="/admin/orders"
