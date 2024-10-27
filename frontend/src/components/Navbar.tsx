@@ -53,7 +53,7 @@ const Navbar = () => {
           {/* <Link to="/profile" className="hover:text-hoverGreen  font-medium">Profile</Link> */}
           <Link to="/menu" className="hover:text-hoverGreen  font-medium">Menu</Link>
           <Link to="/restaurants" className="hover:text-hoverGreen  font-medium">Restaurant</Link>
-          <Link to="/order/status" className="hover:text-hoverGreen  font-medium">Order</Link>
+          <Link to="/order/status" className="hover:text-hoverGreen  font-medium">My Orders</Link>
 
           {admin && (
             <Menubar>
@@ -61,7 +61,7 @@ const Navbar = () => {
                 <MenubarTrigger className="cursor-pointer">Dashboard</MenubarTrigger>
                 <MenubarContent>
                   <Link to="/admin/restaurant">
-                    <MenubarItem className="cursor-pointer">Restaurant</MenubarItem>
+                    <MenubarItem className="cursor-pointer">Your Restaurant</MenubarItem>
                   </Link>
                   <Link to="/admin/menu">
                     <MenubarItem className="cursor-pointer">Menu</MenubarItem>
@@ -197,7 +197,7 @@ const MobileNavbar = () => {
             className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
           >
             <HandPlatter />
-            <span>Order</span>
+            <span>My Orders</span>
           </Link>
           <Link
             to="/cart"
@@ -220,7 +220,7 @@ const MobileNavbar = () => {
                 className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
               >
                 <UtensilsCrossed />
-                <span>Restaurant</span>
+                <span>Your Restaurant</span>
               </Link>
               <Link
                 to="/admin/orders"
