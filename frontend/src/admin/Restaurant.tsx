@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { restaurantFormSchema, RestaurantFormSchema } from "@/schema/restaurantSchema";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 
 const Restaurant = () => {
-    const [input, setInput] = useState({
+    const [input, setInput] = useState<RestaurantFormSchema>({
         restaurantName: "",
         city: "",
         country: "",
@@ -13,6 +14,9 @@ const Restaurant = () => {
         cuisines: [],
         imageFile: undefined,
     });
+
+    // partial isliye hai kyuki ho skta h sirf ek adh m error ho
+    const [errors, setErrors] = useState<Partial<RestaurantFormSchema>>({});
 
     const loading: boolean = false;
     const restaurant: boolean = false;
@@ -22,8 +26,15 @@ const Restaurant = () => {
         setInput({ ...input, [name]: type === "number" ? Number(value) : value });
     };
 
-    const submitHandler = () => {
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
+        const result = restaurantFormSchema.safeParse(input);
+        if (!result.success) {
+            const fieldErrors = result.error.formErrors.fieldErrors;
+            setErrors(fieldErrors as Partial<RestaurantFormSchema>);
+            return;
+        }
 
     }
     return (
@@ -39,7 +50,6 @@ const Restaurant = () => {
                     </h1>
                     <form onSubmit={submitHandler}>
                         <div className="md:grid grid-cols-2 gap-6 space-y-2 md:space-y-0">
-                            {/* Restaurant Name  */}
                             <div>
                                 <Label>Restaurant Name</Label>
                                 <Input
@@ -49,11 +59,11 @@ const Restaurant = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter your restaurant name"
                                 />
-                                {/* {errors && (
+                                {errors && (
                                     <span className="text-xs text-red-600 font-medium">
                                         {errors.restaurantName}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                             <div>
                                 <Label>City</Label>
@@ -64,11 +74,11 @@ const Restaurant = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter your city name"
                                 />
-                                {/* {errors && (
+                                {errors && (
                                     <span className="text-xs text-red-600 font-medium">
                                         {errors.city}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                             <div>
                                 <Label>Country</Label>
@@ -79,11 +89,11 @@ const Restaurant = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter your country name"
                                 />
-                                {/* {errors && (
+                                {errors && (
                                     <span className="text-xs text-red-600 font-medium">
                                         {errors.country}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                             <div>
                                 <Label>Delivery Time</Label>
@@ -94,11 +104,11 @@ const Restaurant = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter your delivery time"
                                 />
-                                {/* {errors && (
+                                {errors && (
                                     <span className="text-xs text-red-600 font-medium">
                                         {errors.deliveryTime}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                             <div>
                                 <Label>Cuisines</Label>
@@ -106,35 +116,35 @@ const Restaurant = () => {
                                     type="text"
                                     name="cuisines"
                                     value={input.cuisines}
-                                    // onChange={(e) =>
-                                    //     setInput({ ...input, cuisines: e.target.value.split(",") })
-                                    // }
+                                    onChange={(e) =>
+                                        setInput({ ...input, cuisines: e.target.value.split(",") })
+                                    }
                                     placeholder="E.g. Momos, Biryani"
                                 />
-                                {/* {errors && (
+                                {errors && (
                                     <span className="text-xs text-red-600 font-medium">
                                         {errors.cuisines}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                             <div>
                                 <Label>Upload Restaurant Banner</Label>
                                 <Input
-                                    // onChange={(e) =>
-                                    //     setInput({
-                                    //         ...input,
-                                    //         imageFile: e.target.files?.[0] || undefined,
-                                    //     })
-                                    // }
+                                    onChange={(e) =>
+                                        setInput({
+                                            ...input,
+                                            imageFile: e.target.files?.[0] || undefined,
+                                        })
+                                    }
                                     type="file"
                                     accept="image/*"
                                     name="imageFile"
                                 />
-                                {/* {errors && (
+                                {errors && (
                                     <span className="text-xs text-red-600 font-medium">
                                         {errors.imageFile?.name}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                         </div>
                         <div className="my-5 w-full flex items-center justify-center">
