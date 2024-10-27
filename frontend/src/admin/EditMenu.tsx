@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
 import { Loader2 } from "lucide-react";
 import {
   Dispatch,
@@ -17,9 +18,9 @@ import {
   useState,
 } from "react";
 
-const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, editOpen: boolean, setEditOpen: Dispatch<SetStateAction<boolean>> }) => {
+const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: MenuFormSchema, editOpen: boolean, setEditOpen: Dispatch<SetStateAction<boolean>> }) => {
 
-  const [input, setInput] = useState<any>({
+  const [input, setInput] = useState<MenuFormSchema>({
     name: "",
     description: "",
     price: 0,
@@ -34,14 +35,16 @@ const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, 
     setInput({ ...input, [name]: type === "number" ? Number(value) : value });
   };
 
+  const [error, setError] = useState<Partial<MenuFormSchema>>({});
+
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const result = menuSchema.safeParse(input);
-    // if (!result.success) {
-    //   const fieldErrors = result.error.formErrors.fieldErrors;
-    //   setError(fieldErrors as Partial<MenuFormSchema>);
-    //   return;
-    // }
+    const result = menuSchema.safeParse(input);
+    if (!result.success) {
+      const fieldErrors = result.error.formErrors.fieldErrors;
+      setError(fieldErrors as Partial<MenuFormSchema>);
+      return;
+    }
 
   }
 
@@ -52,7 +55,7 @@ const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, 
       price: selectedMenu?.price || 0,
       image: undefined,
     });
-  }, [selectedMenu]); 
+  }, [selectedMenu]);
 
 
   return (
@@ -74,7 +77,7 @@ const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, 
               onChange={changeEventHandler}
               placeholder="Enter item name"
             />
-            {/* {error && <span className="text-xs font-medium text-red-600">{error.name}</span>} */}
+            {error && <span className="text-xs font-medium text-red-600">{error.name}</span>}
           </div>
           <div>
             <Label>Description</Label>
@@ -85,7 +88,7 @@ const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, 
               onChange={changeEventHandler}
               placeholder="Enter item description"
             />
-            {/* {error && <span className="text-xs font-medium text-red-600">{error.description}</span>} */}
+            {error && <span className="text-xs font-medium text-red-600">{error.description}</span>}
           </div>
           <div>
             <Label>Price</Label>
@@ -96,7 +99,7 @@ const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, 
               onChange={changeEventHandler}
               placeholder="Enter item price"
             />
-            {/* {error && <span className="text-xs font-medium text-red-600">{error.price}</span>} */}
+            {error && <span className="text-xs font-medium text-red-600">{error.price}</span>}
           </div>
           <div>
             <Label>Upload Menu Image</Label>
@@ -107,7 +110,7 @@ const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, 
                 setInput({ ...input, image: e.target.files?.[0] || undefined })
               }
             />
-            {/* {error && <span className="text-xs font-medium text-red-600">{error.image?.name}</span>} */}
+            {error && <span className="text-xs font-medium text-red-600">{error.image?.name}</span>}
           </div>
           <DialogFooter className="mt-5">
             {loading ? (

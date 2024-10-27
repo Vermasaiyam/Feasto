@@ -13,10 +13,11 @@ import { Label } from "@/components/ui/label";
 import { Loader2, Plus } from "lucide-react";
 import { FormEvent, useState } from "react";
 import EditMenu from "./EditMenu";
+import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
 
 
 const AddMenu = () => {
-    const [input, setInput] = useState<any>({
+    const [input, setInput] = useState<MenuFormSchema>({
         name: "",
         description: "",
         price: 0,
@@ -24,7 +25,7 @@ const AddMenu = () => {
     });
     const [open, setOpen] = useState<boolean>(false);
     const [editOpen, setEditOpen] = useState<boolean>(false);
-    const [selectedMenu, setSelectedMenu] = useState<any>();
+    const [selectedMenu, setSelectedMenu] = useState<MenuFormSchema>();
     const loading: boolean = false;
 
     const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,11 +33,41 @@ const AddMenu = () => {
         setInput({ ...input, [name]: type === "number" ? Number(value) : value });
     };
 
+    const [error, setError] = useState<Partial<MenuFormSchema>>({});
+
     const submitHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(input);
 
+        const result = menuSchema.safeParse(input);
+        if (!result.success) {
+            const fieldErrors = result.error.formErrors.fieldErrors;
+            setError(fieldErrors as Partial<MenuFormSchema>);
+            return;
+        }
+
     }
+
+    const menuItems: MenuFormSchema[] = [
+        {
+            name: "Biryani",
+            description: "lorem gyrfudiosk vyfuhidjs ygfeijds",
+            price: 69,
+            image: undefined,
+        },
+        {
+            name: "Momos",
+            description: "lorem gyrfudiosk vyfuhidjs ygfeijds",
+            price: 69,
+            image: undefined,
+        },
+        {
+            name: "Paneer",
+            description: "lorem gyrfudiosk vyfuhidjs ygfeijds",
+            price: 69,
+            image: undefined,
+        },
+    ]
 
     return (
         <div className="max-w-6xl mx-auto my-10">
@@ -68,11 +99,11 @@ const AddMenu = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter item name"
                                 />
-                                {/* {error && (
+                                {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.name}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                             <div>
                                 <Label>Description</Label>
@@ -83,11 +114,11 @@ const AddMenu = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter item description"
                                 />
-                                {/* {error && (
+                                {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.description}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                             <div>
                                 <Label>Price</Label>
@@ -98,11 +129,11 @@ const AddMenu = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter item price"
                                 />
-                                {/* {error && (
+                                {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.price}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                             <div>
                                 <Label>Upload Menu Image</Label>
@@ -116,11 +147,11 @@ const AddMenu = () => {
                                         })
                                     }
                                 />
-                                {/* {error && (
+                                {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.image?.name}
                                     </span>
-                                )} */}
+                                )}
                             </div>
                             <DialogFooter className="mt-5">
                                 {loading ? (
@@ -139,7 +170,7 @@ const AddMenu = () => {
                 </Dialog>
 
             </div>
-            {["momos", 'biryani', "paneer"].map((menu: string, idx: number) => (
+            {menuItems.map((menu: MenuFormSchema, idx: number) => (
                 <div key={idx} className="mt-6 space-y-4 hover:shadow-lg">
                     <div className="flex flex-col md:flex-row md:items-center md:space-x-4 md:p-4 p-2 shadow-md rounded-lg border">
                         <img
@@ -149,11 +180,11 @@ const AddMenu = () => {
                         />
                         <div className="flex-1">
                             <h1 className="text-lg font-semibold text-gray-800">
-                                {menu}
+                                {menu.name}
                             </h1>
-                            <p className="text-sm tex-gray-600 mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, culpa!</p>
+                            <p className="text-sm tex-gray-600 mt-1">{menu.description}</p>
                             <h2 className="text-md font-semibold mt-2">
-                                Price: <span className="text-green">80</span>
+                                Price: <span className="text-green">{menu.price}</span>
                             </h2>
                         </div>
                         <Button
