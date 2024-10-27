@@ -11,11 +11,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, Plus } from "lucide-react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import EditMenu from "./EditMenu";
 
 
 const AddMenu = () => {
-    const [input, setInput] = useState({
+    const [input, setInput] = useState<any>({
         name: "",
         description: "",
         price: 0,
@@ -31,7 +32,9 @@ const AddMenu = () => {
         setInput({ ...input, [name]: type === "number" ? Number(value) : value });
     };
 
-    const submitHandler = () => {
+    const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(input);
 
     }
 
@@ -42,97 +45,97 @@ const AddMenu = () => {
                     My Menu
                 </h1>
                 <Dialog open={open} onOpenChange={setOpen}>
-                        <DialogTrigger>
-                            <Button className="bg-green hover:bg-hoverGreen">
-                                <Plus className="mr-2" />
-                                Add Item
-                            </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                            <DialogHeader>
-                                <DialogTitle>Add A New Item</DialogTitle>
-                                <DialogDescription>
-                                    Design a menu that will make your restaurant unforgettable.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <form onSubmit={submitHandler} className="space-y-4">
-                                <div>
-                                    <Label>Name</Label>
-                                    <Input
-                                        type="text"
-                                        name="name"
-                                        value={input.name}
-                                        onChange={changeEventHandler}
-                                        placeholder="Enter item name"
-                                    />
-                                    {/* {error && (
+                    <DialogTrigger>
+                        <Button className="bg-green hover:bg-hoverGreen">
+                            <Plus className="mr-2" />
+                            Add Item
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Add A New Item</DialogTitle>
+                            <DialogDescription>
+                                Design a menu that will make your restaurant unforgettable.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <form onSubmit={submitHandler} className="space-y-4">
+                            <div>
+                                <Label>Name</Label>
+                                <Input
+                                    type="text"
+                                    name="name"
+                                    value={input.name}
+                                    onChange={changeEventHandler}
+                                    placeholder="Enter item name"
+                                />
+                                {/* {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.name}
                                     </span>
                                 )} */}
-                                </div>
-                                <div>
-                                    <Label>Description</Label>
-                                    <Input
-                                        type="text"
-                                        name="description"
-                                        value={input.description}
-                                        onChange={changeEventHandler}
-                                        placeholder="Enter item description"
-                                    />
-                                    {/* {error && (
+                            </div>
+                            <div>
+                                <Label>Description</Label>
+                                <Input
+                                    type="text"
+                                    name="description"
+                                    value={input.description}
+                                    onChange={changeEventHandler}
+                                    placeholder="Enter item description"
+                                />
+                                {/* {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.description}
                                     </span>
                                 )} */}
-                                </div>
-                                <div>
-                                    <Label>Price</Label>
-                                    <Input
-                                        type="number"
-                                        name="price"
-                                        value={input.price}
-                                        onChange={changeEventHandler}
-                                        placeholder="Enter item price"
-                                    />
-                                    {/* {error && (
+                            </div>
+                            <div>
+                                <Label>Price</Label>
+                                <Input
+                                    type="number"
+                                    name="price"
+                                    value={input.price}
+                                    onChange={changeEventHandler}
+                                    placeholder="Enter item price"
+                                />
+                                {/* {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.price}
                                     </span>
                                 )} */}
-                                </div>
-                                <div>
-                                    <Label>Upload Menu Image</Label>
-                                    <Input
-                                        type="file"
-                                        name="image"
-                                    // onChange={(e) =>
-                                    //     setInput({
-                                    //         ...input,
-                                    //         image: e.target.files?.[0] || undefined,
-                                    //     })
-                                    // }
-                                    />
-                                    {/* {error && (
+                            </div>
+                            <div>
+                                <Label>Upload Menu Image</Label>
+                                <Input
+                                    type="file"
+                                    name="image"
+                                    onChange={(e) =>
+                                        setInput({
+                                            ...input,
+                                            image: e.target.files?.[0] || undefined,
+                                        })
+                                    }
+                                />
+                                {/* {error && (
                                     <span className="text-xs font-medium text-red-600">
                                         {error.image?.name}
                                     </span>
                                 )} */}
-                                </div>
-                                <DialogFooter className="mt-5">
-                                    {loading ? (
-                                        <Button disabled className="w-full bg-green hover:bg-hoverGreen">
-                                            <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                                            Please wait
-                                        </Button>
-                                    ) : (
-                                        <Button className="w-full bg-green hover:bg-hoverGreen">
-                                            Submit
-                                        </Button>
-                                    )}
-                                </DialogFooter>
-                            </form>
-                        </DialogContent>
+                            </div>
+                            <DialogFooter className="mt-5">
+                                {loading ? (
+                                    <Button disabled className="w-full bg-green hover:bg-hoverGreen">
+                                        <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                                        Please wait
+                                    </Button>
+                                ) : (
+                                    <Button className="w-full bg-green hover:bg-hoverGreen">
+                                        Submit
+                                    </Button>
+                                )}
+                            </DialogFooter>
+                        </form>
+                    </DialogContent>
                 </Dialog>
 
             </div>
@@ -166,11 +169,11 @@ const AddMenu = () => {
                     </div>
                 </div>
             ))}
-            {/* <EditMenu
+            <EditMenu
                 selectedMenu={selectedMenu}
                 editOpen={editOpen}
                 setEditOpen={setEditOpen}
-            /> */}
+            />
         </div>
     )
 }

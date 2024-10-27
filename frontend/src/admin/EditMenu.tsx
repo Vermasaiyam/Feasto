@@ -1,0 +1,121 @@
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Loader2 } from "lucide-react";
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+
+const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, editOpen: boolean, setEditOpen: Dispatch<SetStateAction<boolean>> }) => {
+
+  const [input, setInput] = useState<any>({
+    name: "",
+    description: "",
+    price: 0,
+    image: undefined,
+  });
+
+  const loading: boolean = false;
+
+
+  const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
+    setInput({ ...input, [name]: type === "number" ? Number(value) : value });
+  };
+
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // const result = menuSchema.safeParse(input);
+    // if (!result.success) {
+    //   const fieldErrors = result.error.formErrors.fieldErrors;
+    //   setError(fieldErrors as Partial<MenuFormSchema>);
+    //   return;
+    // }
+
+
+  }
+
+
+  return (
+    <Dialog open={editOpen} onOpenChange={setEditOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit Menu</DialogTitle>
+          <DialogDescription>
+            Keep your menu fresh and exciting with regular updates to delight your guests!
+          </DialogDescription>
+        </DialogHeader>
+        <form onSubmit={submitHandler} className="space-y-4">
+          <div>
+            <Label>Name</Label>
+            <Input
+              type="text"
+              name="name"
+              value={input.name}
+              onChange={changeEventHandler}
+              placeholder="Enter item name"
+            />
+            {/* {error && <span className="text-xs font-medium text-red-600">{error.name}</span>} */}
+          </div>
+          <div>
+            <Label>Description</Label>
+            <Input
+              type="text"
+              name="description"
+              value={input.description}
+              onChange={changeEventHandler}
+              placeholder="Enter item description"
+            />
+            {/* {error && <span className="text-xs font-medium text-red-600">{error.description}</span>} */}
+          </div>
+          <div>
+            <Label>Price</Label>
+            <Input
+              type="number"
+              name="price"
+              value={input.price}
+              onChange={changeEventHandler}
+              placeholder="Enter item price"
+            />
+            {/* {error && <span className="text-xs font-medium text-red-600">{error.price}</span>} */}
+          </div>
+          <div>
+            <Label>Upload Menu Image</Label>
+            <Input
+              type="file"
+              name="image"
+              onChange={(e) =>
+                setInput({ ...input, image: e.target.files?.[0] || undefined })
+              }
+            />
+            {/* {error && <span className="text-xs font-medium text-red-600">{error.image?.name}</span>} */}
+          </div>
+          <DialogFooter className="mt-5">
+            {loading ? (
+              <Button disabled className="bg-green hover:bg-hoverGreen">
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                Please wait
+              </Button>
+            ) : (
+              <Button className="bg-green hover:bg-hoverGreen">Submit</Button>
+            )}
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+export default EditMenu
