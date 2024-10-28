@@ -5,7 +5,7 @@ import crypto from "crypto";
 import cloudinary from "../utils/cloudinary";
 import { generateVerificationCode } from "../utils/generateVerificationCode";
 import { generateToken } from "../utils/generateToken";
-// import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/email";
+import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/email";
 
 export const signup = async (req: Request, res: Response) => {
     try {
@@ -31,7 +31,7 @@ export const signup = async (req: Request, res: Response) => {
         })
         generateToken(res, user);
 
-        // await sendVerificationEmail(email, verificationToken);
+        await sendVerificationEmail(email, verificationToken);
 
         const userWithoutPassword = await User.findOne({ email }).select("-password");
         return res.status(201).json({
@@ -101,7 +101,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
         await user.save();
 
         // send welcome email
-        // await sendWelcomeEmail(user.email, user.fullname);
+        await sendWelcomeEmail(user.email, user.fullname);
 
         return res.status(200).json({
             success: true,
@@ -146,7 +146,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
         await user.save();
 
         // send email
-        // await sendPasswordResetEmail(user.email, `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`);
+        await sendPasswordResetEmail(user.email, `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`);
 
         return res.status(200).json({
             success: true,
@@ -177,7 +177,7 @@ export const resetPassword = async (req: Request, res: Response) => {
         await user.save();
 
         // send success reset email
-        // await sendResetSuccessEmail(user.email);
+        await sendResetSuccessEmail(user.email);
 
         return res.status(200).json({
             success: true,
@@ -213,7 +213,7 @@ export const updateProfile = async (req: Request, res: Response) => {
     try {
         const userId = req.id;
         const { fullname, email, address, city, country, profilePicture } = req.body;
-        
+
         //cloudinary
         let cloudResponse: any;
         cloudResponse = await cloudinary.uploader.upload(profilePicture);
