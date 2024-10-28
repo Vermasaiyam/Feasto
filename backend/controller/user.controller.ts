@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../models/user.model";
 import bcrypt from "bcryptjs";
-// import crypto from "crypto";
+import crypto from "crypto";
 // import cloudinary from "../utils/cloudinary";
 // import { generateVerificationCode } from "../utils/generateVerificationCode";
 // import { generateToken } from "../utils/generateToken";
@@ -126,3 +126,35 @@ export const logout = async (_: Request, res: Response) => {
         return res.status(500).json({ message: "Internal Server Error" })
     }
 };
+
+export const forgotPassword = async (req: Request, res: Response) => {
+    try {
+        const { email } = req.body;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: "User doesn't exist"
+            });
+        }
+
+        const resetToken = crypto.randomBytes(40).toString('hex');
+        const resetTokenExpiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000); // 1 hour
+
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordTokenExpiresAt = resetTokenExpiresAt;
+        await user.save();
+
+        // send email
+        // await sendPasswordResetEmail(user.email, `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`);
+
+        return res.status(200).json({
+            success: true,
+            message: "Password reset link sent to your email"
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
