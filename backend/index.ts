@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 // import connectDB from './db/ConnectDB';
+import userRoute from "./routes/user.route";
 dotenv.config();
 
 const app = express();
@@ -16,6 +17,9 @@ const connectDB = async () => {
         console.log(error);
     }
 }
+
+
+app.use("/api/user", userRoute);
 
 app.listen(PORT, () => {
     connectDB();
