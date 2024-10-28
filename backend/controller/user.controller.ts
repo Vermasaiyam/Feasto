@@ -93,7 +93,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid or expired verification token"
+                message: "Invalid Verification Token."
             });
         }
         user.isVerified = true;
@@ -106,7 +106,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
 
         return res.status(200).json({
             success: true,
-            message: "Email verified successfully.",
+            message: "Email Verified Successfully.",
             user,
         })
     } catch (error) {
@@ -114,3 +114,15 @@ export const verifyEmail = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+export const logout = async (_: Request, res: Response) => {
+    try {
+        return res.clearCookie("token").status(200).json({
+            success: true,
+            message: "Logged Out Successfully."
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Internal Server Error" })
+    }
+};
