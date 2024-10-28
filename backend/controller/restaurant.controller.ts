@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Restaurant } from "../models/restaurant.model";
 import { Order } from "../models/order.model";
 import { Multer } from "multer";
-// import uploadImageOnCloudinary from "../utils/imageUpload";
+import uploadImageOnCloudinary from "../utils/uploadImage";
 
 export const createRestaurant = async (req: Request, res: Response) => {
     try {
@@ -23,7 +23,7 @@ export const createRestaurant = async (req: Request, res: Response) => {
                 message: "Image is required."
             })
         }
-        // const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
+        const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
         await Restaurant.create({
             user: req.id,
             restaurantName,
@@ -31,7 +31,7 @@ export const createRestaurant = async (req: Request, res: Response) => {
             country,
             deliveryTime,
             cuisines: JSON.parse(cuisines),
-            // imageUrl
+            imageUrl
         });
         return res.status(201).json({
             success: true,
