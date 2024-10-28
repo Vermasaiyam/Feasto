@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectDB from './db/ConnectDB';
 import userRoute from "./routes/user.route";
+import restaurantRoute from "./routes/restaurant.route";
 dotenv.config();
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(cors(corsOptions));
 
 
 app.use("/api/user", userRoute);
+app.use("/api/restaurant", restaurantRoute);
 
 app.listen(PORT, () => {
     connectDB();
