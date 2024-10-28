@@ -1,3 +1,4 @@
+import { generatePasswordResetEmailHtml, generateResetSuccessEmailHtml, generateWelcomeEmailHtml, htmlContent } from "./htmlEmail";
 import { client, sender } from "./mailtrap";
 
 export const sendVerificationEmail = async (email: string, verificationToken: string) => {
@@ -7,7 +8,7 @@ export const sendVerificationEmail = async (email: string, verificationToken: st
             from: sender,
             to: recipient,
             subject: 'Verify your email',
-            // html:htmlContent.replace("{verificationToken}", verificationToken),
+            html:htmlContent.replace("{verificationToken}", verificationToken),
             category: 'Email Verification'
         });
     } catch (error) {
@@ -18,8 +19,8 @@ export const sendVerificationEmail = async (email: string, verificationToken: st
 
 export const sendWelcomeEmail = async (email: string, name: string) => {
     const recipient = [{ email }];
-    // const htmlContent = generateWelcomeEmailHtml(name);
-    const htmlContent = "";
+    const htmlContent = generateWelcomeEmailHtml(name);
+    // const htmlContent = "";
     try {
         const res = await client.send({
             from: sender,
@@ -39,8 +40,8 @@ export const sendWelcomeEmail = async (email: string, name: string) => {
 
 export const sendPasswordResetEmail = async (email: string, resetURL: string) => {
     const recipient = [{ email }];
-    // const htmlContent = generatePasswordResetEmailHtml(resetURL);
-    const htmlContent = "";
+    const htmlContent = generatePasswordResetEmailHtml(resetURL);
+    // const htmlContent = "";
     try {
         const res = await client.send({
             from: sender,
@@ -57,8 +58,8 @@ export const sendPasswordResetEmail = async (email: string, resetURL: string) =>
 
 export const sendResetSuccessEmail = async (email: string) => {
     const recipient = [{ email }];
-    // const htmlContent = generateResetSuccessEmailHtml();
-    const htmlContent = "";
+    const htmlContent = generateResetSuccessEmailHtml();
+    // const htmlContent = "";
     try {
         const res = await client.send({
             from: sender,
