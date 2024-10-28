@@ -3,8 +3,8 @@ import { User } from "../models/user.model";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import cloudinary from "../utils/cloudinary";
-// import { generateVerificationCode } from "../utils/generateVerificationCode";
-// import { generateToken } from "../utils/generateToken";
+import { generateVerificationCode } from "../utils/generateVerificationCode";
+import { generateToken } from "../utils/generateToken";
 // import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/email";
 
 export const signup = async (req: Request, res: Response) => {
@@ -19,7 +19,7 @@ export const signup = async (req: Request, res: Response) => {
             })
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const verificationToken = 'cgdyhsxuijozkxjnfhbvcud'//generateVerificationCode();
+        const verificationToken = generateVerificationCode();
 
         user = await User.create({
             fullname,
@@ -29,7 +29,7 @@ export const signup = async (req: Request, res: Response) => {
             verificationToken,
             verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000,
         })
-        // generateToken(res, user);
+        generateToken(res, user);
 
         // await sendVerificationEmail(email, verificationToken);
 
@@ -65,12 +65,11 @@ export const login = async (req: Request, res: Response) => {
                 message: "Incorrect Email or Password."
             });
         }
-        // generateToken(res, user);
+        generateToken(res, user);
 
         user.lastLogin = new Date();
         await user.save();
 
-        // send user without passowrd
         const userWithoutPassword = await User.findOne({ email }).select("-password");
         return res.status(200).json({
             success: true,
@@ -214,7 +213,8 @@ export const updateProfile = async (req: Request, res: Response) => {
     try {
         const userId = req.id;
         const { fullname, email, address, city, country, profilePicture } = req.body;
-        // upload image on cloudinary
+        
+        //cloudinary
         let cloudResponse: any;
         cloudResponse = await cloudinary.uploader.upload(profilePicture);
         const updatedData = { fullname, email, address, city, country, profilePicture };
