@@ -17,7 +17,7 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
             <div className="grid md:grid-cols-3 space-y-4 md:space-y-0">
                 {menus.map((menu: MenuItem) => (
                     <Card className="max-w-xs mx-auto shadow-lg rounded-lg overflow-hidden relative">
-                        <img src="https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141352.jpg" alt="Menu Image" className="w-full h-40 object-cover" />
+                        <img src={menu.image} alt={menu.name} className="w-full h-40 object-cover" />
                         <div className="absolute top-2 left-2 bg-white rounded-full p-1 cursor-pointer">
                             <Heart className="w-5 h-5" />
                         </div>
@@ -40,7 +40,7 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
                                     variant={"outline"}
                                     onClick={() => {
                                         // addToCart(menu);
-                                        navigate("/cart");
+                                        // navigate("/cart");
                                     }}
                                     className="rounded-full border border-green text-green hover:bg-green hover:text-white"
                                 >
