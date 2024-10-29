@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Plus } from "lucide-react";
+import { IndianRupee, Loader2, Plus } from "lucide-react";
 import { FormEvent, useState } from "react";
 import EditMenu from "./EditMenu";
 import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
@@ -62,7 +62,7 @@ const AddMenu = () => {
                 formData.append("image", input.image);
             }
             await createMenu(formData);
-        } 
+        }
         catch (error) {
             console.log(error);
         }
@@ -206,8 +206,8 @@ const AddMenu = () => {
                                 {menu.name}
                             </h1>
                             <p className="text-sm tex-gray-600 mt-1">{menu.description}</p>
-                            <h2 className="text-md font-semibold mt-2">
-                                Price: <span className="text-green">{menu.price}</span>
+                            <h2 className="text-md font-semibold mt-2 flex items-center">
+                                Price: <span className="text-green flex items-center mx-2">₹{menu.price}</span>
                             </h2>
                         </div>
                         <Button
