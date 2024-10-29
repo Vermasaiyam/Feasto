@@ -4,19 +4,23 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Input } from "./ui/input";
 import { useRef, useState } from "react";
 import { Label } from "./ui/label";
+import { useUserStore } from "@/store/useUserStore";
 
 
 const Profile = () => {
     const imageRef = useRef<HTMLInputElement | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const user = {
-        fullname: "Saiyam Verma",
-        email: "vermasaiyam9@gmail.com",
-        address: "meerut",
-        city: "Meerut",
-        country: "India",
-        profilePicture: ""
-    }
+    // const user = {
+    //     fullname: "Saiyam Verma",
+    //     email: "vermasaiyam9@gmail.com",
+    //     address: "meerut",
+    //     city: "Meerut",
+    //     country: "India",
+    //     profilePicture: ""
+    // }
+
+    const { user, updateProfile } = useUserStore();
+
     const [profileData, setProfileData] = useState({
         fullname: user?.fullname || "",
         email: user?.email || "",
@@ -55,7 +59,7 @@ const Profile = () => {
         e.preventDefault();
         try {
             setIsLoading(true);
-            // await updateProfile(profileData);
+            await updateProfile(profileData);
             setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
@@ -150,7 +154,7 @@ const Profile = () => {
                         Please wait
                     </Button>
                 ) : (
-                    <Button type="submit" className="bg-green hover:bg-hoverGreen">Update</Button>
+                    <Button type="submit" onClick={updateProfile} className="bg-green hover:bg-hoverGreen">Update</Button>
                 )}
             </div>
         </form>
