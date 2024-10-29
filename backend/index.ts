@@ -6,6 +6,7 @@ import cors from "cors";
 import connectDB from './db/ConnectDB';
 import userRoute from "./routes/user.route";
 import restaurantRoute from "./routes/restaurant.route";
+import menuRoute from "./routes/menu.route";
 dotenv.config();
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(cors(corsOptions));
 
 app.use("/api/user", userRoute);
 app.use("/api/restaurant", restaurantRoute);
+app.use("/api/menu", menuRoute);
 
 app.listen(PORT, () => {
     connectDB();
