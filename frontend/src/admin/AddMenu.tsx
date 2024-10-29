@@ -198,7 +198,7 @@ const AddMenu = () => {
                     <div className="flex flex-col md:flex-row md:items-center md:space-x-4 md:p-4 p-2 shadow-md rounded-lg border">
                         <img
                             src={menu.image}
-                            alt="Item Image"
+                            alt={menu.name}
                             className="md:h-24 md:w-24 h-28 w-full object-cover rounded-lg"
                         />
                         <div className="flex-1">
