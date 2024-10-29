@@ -120,7 +120,9 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
             if (response.data.success) {
                 set({ singleRestaurant: response.data.restaurant })
             }
-        } catch (error) { }
+        } catch (error) { 
+            console.log(error);
+        }
     },
     getRestaurantOrders: async () => {
         try {
