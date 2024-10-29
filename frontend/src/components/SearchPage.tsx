@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import FilterPage from "./FilterPage";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -15,8 +15,6 @@ const SearchPage = () => {
     const params = useParams();
     const [searchQuery, setSearchQuery] = useState<string>("");
     // const loading: boolean = false;
-
-    const navigate = useNavigate();
 
 
     const {
