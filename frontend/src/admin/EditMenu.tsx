@@ -61,6 +61,8 @@ const EditMenu = ({ selectedMenu, editOpen, setEditOpen }: { selectedMenu: any, 
     } catch (error) {
       console.log(error);
     }
+
+    setEditOpen(false);
   }
 
   useEffect(() => {

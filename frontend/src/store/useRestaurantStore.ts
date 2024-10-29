@@ -83,12 +83,12 @@ export const useRestaurantStore = create<any>()(persist((set, get) => ({
             set({ loading: false });
         }
     },
-    addMenuToRestaurant: (menu: MenuItem) => {
+    addMenuToRestaurant: (menu: any) => {
         set((state: any) => ({
             restaurant: state.restaurant ? { ...state.restaurant, menus: [...state.restaurant.menus, menu] } : null,
         }))
     },
-    updateMenuToRestaurant: (updatedMenu: MenuItem) => {
+    updateMenuToRestaurant: (updatedMenu: any) => {
         set((state: any) => {
             
             if (state.restaurant) {
