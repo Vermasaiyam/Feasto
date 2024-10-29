@@ -1,15 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useUserStore } from "@/store/useUserStore";
 import { Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react"
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
     const [val, setVal] = useState<string[]>(["", "", "", "", "", ""]);
     const inputRef = useRef<any>([]);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    const loading = false;
+    // const loading = false;
+
+    const {verifyEmail, loading} = useUserStore();
 
     const handleChange = (index: number, value: string) => {
         if (/^[a-zA-Z0-9]$/.test(value) || value === "") {
@@ -20,9 +23,7 @@ const VerifyEmail = () => {
                 inputRef.current[index + 1].focus();
             }
         }
-
     }
-
 
     const handleKeyDown = (
         index: number,
@@ -30,6 +31,17 @@ const VerifyEmail = () => {
     ) => {
         if (e.key === "Backspace" && !val[index] && index > 0) {
             inputRef.current[index - 1].focus();
+        }
+    };
+
+    const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const verificationCode = val.join("");
+        try {
+            await verifyEmail(verificationCode);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -46,7 +58,7 @@ const VerifyEmail = () => {
                         Enter the 6 digit code sent to your email address
                     </p>
                 </div>
-                <form action="">
+                <form action="" onSubmit={submitHandler}>
                     <div className="flex justify-between">
                         {
                             val.map((letter: string, index: number) => {
@@ -56,7 +68,7 @@ const VerifyEmail = () => {
                                         ref={(element) => inputRef.current[index] = element}
                                         type="text"
                                         value={letter}
-                                        className="md:h-12 md:w-12 w-8 h-8 text-center text-sm md:text-2xl font-normal md:font-semibold rounded-lg focus-outline-none focus-ring-2 focus:ring-indigo-500"
+                                        className="md:h-12 md:w-12 w-10 h-10 text-center text-sm md:text-2xl font-normal md:font-semibold rounded-lg focus-outline-none focus-ring-2 focus:ring-indigo-500"
                                         maxLength={1}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
                                         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>

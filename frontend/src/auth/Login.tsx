@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { LoginInputState, userLoginSchema } from "@/schema/userSchema"
+import { useUserStore } from "@/store/useUserStore"
 
 
 const Login = () => {
@@ -14,7 +15,8 @@ const Login = () => {
 
     const [errors, setErrors] = useState<Partial<LoginInputState>>({});
 
-    const loading = false;
+    const {login, loading} = useUserStore();
+    // const loading = false;
 
     const [input, setInput] = useState<LoginInputState>({
         email: "",
@@ -26,7 +28,7 @@ const Login = () => {
         setInput({ ...input, [name]: value });
     }
 
-    const loginSubmitHandler = async (e: FormEvent) => {
+    const loginSubmitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log(input);
 
@@ -37,6 +39,7 @@ const Login = () => {
             return;
         }
 
+        await login(input);
     };
 
     return (
