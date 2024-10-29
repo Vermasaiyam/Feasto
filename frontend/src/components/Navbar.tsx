@@ -30,11 +30,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Separator } from "./ui/separator";
+import { useUserStore } from "@/store/useUserStore";
 
 
 
 const Navbar = () => {
-  const admin: boolean = true;
+  const { user, logout } = useUserStore();
+  // const admin: boolean = true;
   // const loading: boolean = false;
   const cart = [1, 2, 3];
 
@@ -52,10 +54,10 @@ const Navbar = () => {
           <Link to="/" className="hover:text-hoverGreen font-medium">Home</Link>
           {/* <Link to="/profile" className="hover:text-hoverGreen  font-medium">Profile</Link> */}
           <Link to="/menu" className="hover:text-hoverGreen  font-medium">Menu</Link>
-          <Link to="/restaurants" className="hover:text-hoverGreen  font-medium">Restaurant</Link>
+          <Link to="/restaurants" className="hover:text-hoverGreen  font-medium">Restaurants</Link>
           <Link to="/order/status" className="hover:text-hoverGreen  font-medium">My Orders</Link>
 
-          {admin && (
+          {user?.admin && (
             <Menubar>
               <MenubarMenu>
                 <MenubarTrigger className="cursor-pointer">Dashboard</MenubarTrigger>
@@ -124,10 +126,10 @@ const Navbar = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <div className='flex w-fit items-center gap-2 cursor-pointer'>
+                  <button onClick={logout} className='flex w-fit items-center gap-2 cursor-pointer'>
                     <LogOut />
-                    <Button variant="ghost">Logout</Button>
-                  </div>
+                    <Button variant="ghost" >Logout</Button>
+                  </button>
                 </DropdownMenuItem>
 
               </DropdownMenuContent>
@@ -151,8 +153,8 @@ const MobileNavbar = () => {
   // const { user, logout, loading } = useUserStore();
   // const { setTheme } = useThemeStore();
 
-  const admin: boolean = true;
-  const loading: boolean = false;
+  const { user, loading, logout } = useUserStore();
+
   const cart = [1, 2, 3];
 
   return (
@@ -192,6 +194,14 @@ const MobileNavbar = () => {
             <User />
             <span>Profile</span>
           </Link>
+          <Link to="/menu" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium">
+            <SquareMenu />
+            <span>Menu</span>
+          </Link>
+          <Link to="/restaurants" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium">
+            <UtensilsCrossed />
+            <span>Restaurants</span>
+          </Link>
           <Link
             to="/order/status"
             className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
@@ -206,7 +216,7 @@ const MobileNavbar = () => {
             <ShoppingCart />
             <span>Cart ({cart.length})</span>
           </Link>
-          {admin && (
+          {user?.admin && (
             <>
               <Link
                 to="/admin/menu"
@@ -248,7 +258,7 @@ const MobileNavbar = () => {
               </Button>
             ) : (
               <Button
-                // onClick={logout}
+                onClick={logout}
                 className="bg-green hover:bg-hoverGreen"
               >
                 Logout
