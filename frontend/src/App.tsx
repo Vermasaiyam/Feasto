@@ -17,6 +17,7 @@ import Orders from './admin/Orders'
 import Success from './components/Success'
 import { useUserStore } from './store/useUserStore'
 import { useEffect } from 'react'
+import Loading from './components/Loading'
 
 
 const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
@@ -143,7 +144,7 @@ function App() {
     // initializeTheme();
   }, [checkAuthentication])
 
-  // if (isCheckingAuth) return <Loading />
+  if (isCheckingAuth) return <Loading />
 
   return (
     <main>
