@@ -112,7 +112,7 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar className="cursor-pointer">
-                  <AvatarImage src="" alt="profilephoto" />
+                  <AvatarImage src={user?.profilePicture} alt={user?.fullname} />
                   <AvatarFallback>SV</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
@@ -150,7 +150,6 @@ const Navbar = () => {
 export default Navbar
 
 const MobileNavbar = () => {
-  // const { user, logout, loading } = useUserStore();
   // const { setTheme } = useThemeStore();
 
   const { user, loading, logout } = useUserStore();
@@ -245,10 +244,10 @@ const MobileNavbar = () => {
         <SheetFooter className="flex flex-col gap-4">
           <Link to={'/profile'} className="flex flex-row items-center gap-2">
             <Avatar>
-              <AvatarImage src="" />
+              <AvatarImage src={user?.profilePicture} alt={user?.fullname} />
               <AvatarFallback>SV</AvatarFallback>
             </Avatar>
-            <h1 className="font-bold">Saiyam Verma</h1>
+            <h1 className="font-bold">{user?.fullname}</h1>
           </Link>
           <SheetClose asChild>
             {loading ? (
