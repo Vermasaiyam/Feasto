@@ -1,6 +1,6 @@
 
-// import { Orders } from "@/types/orderType";
-// import { MenuItem, RestaurantState } from "@/types/restaurantType";
+import { Orders } from "@/types/orderType";
+import { MenuItem, RestaurantState } from "@/types/restaurantType";
 import axios from "axios";
 import { toast } from "sonner";
 import { create } from "zustand";
@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 
 // <RestaurantState>
 
-export const useRestaurantStore = create<any>()(persist((set, get) => ({
+export const useRestaurantStore = create<RestaurantState>()(persist((set, get) => ({
     loading: false,
     restaurant: null,
     searchedRestaurant: null,
@@ -83,12 +83,12 @@ export const useRestaurantStore = create<any>()(persist((set, get) => ({
             set({ loading: false });
         }
     },
-    addMenuToRestaurant: (menu: any) => {
+    addMenuToRestaurant: (menu: MenuItem) => {
         set((state: any) => ({
             restaurant: state.restaurant ? { ...state.restaurant, menus: [...state.restaurant.menus, menu] } : null,
         }))
     },
-    updateMenuToRestaurant: (updatedMenu: any) => {
+    updateMenuToRestaurant: (updatedMenu: MenuItem) => {
         set((state: any) => {
             
             if (state.restaurant) {
