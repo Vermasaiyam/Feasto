@@ -1,4 +1,4 @@
-import { Loader,  LucideLoaderCircle } from "lucide-react";
+import { LucideLoaderCircle } from "lucide-react";
 
 const Loading = () => {
     return (
