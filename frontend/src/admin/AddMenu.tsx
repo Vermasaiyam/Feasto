@@ -14,6 +14,8 @@ import { Loader2, Plus } from "lucide-react";
 import { FormEvent, useState } from "react";
 import EditMenu from "./EditMenu";
 import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
+import { useMenuStore } from "@/store/useMenuStore";
+import { useRestaurantStore } from "@/store/useRestaurantStore";
 
 
 const AddMenu = () => {
@@ -25,8 +27,12 @@ const AddMenu = () => {
     });
     const [open, setOpen] = useState<boolean>(false);
     const [editOpen, setEditOpen] = useState<boolean>(false);
-    const [selectedMenu, setSelectedMenu] = useState<MenuFormSchema>();
-    const loading: boolean = false;
+    const [selectedMenu, setSelectedMenu] = useState<any>();
+    // const loading: boolean = false;
+
+
+    const { loading, createMenu } = useMenuStore();
+    const { restaurant } = useRestaurantStore();
 
     const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type } = e.target;
@@ -35,7 +41,7 @@ const AddMenu = () => {
 
     const [error, setError] = useState<Partial<MenuFormSchema>>({});
 
-    const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(input);
 
@@ -46,28 +52,45 @@ const AddMenu = () => {
             return;
         }
 
+        // api
+        try {
+            const formData = new FormData();
+            formData.append("name", input.name);
+            formData.append("description", input.description);
+            formData.append("price", input.price.toString());
+            if (input.image) {
+                formData.append("image", input.image);
+            }
+            await createMenu(formData);
+        } 
+        catch (error) {
+            console.log(error);
+        }
+
+        setOpen(false);
+
     }
 
-    const menuItems: MenuFormSchema[] = [
-        {
-            name: "Biryani",
-            description: "lorem gyrfudiosk vyfuhidjs ygfeijds",
-            price: 69,
-            image: undefined,
-        },
-        {
-            name: "Momos",
-            description: "lorem gyrfudiosk vyfuhidjs ygfeijds",
-            price: 69,
-            image: undefined,
-        },
-        {
-            name: "Paneer",
-            description: "lorem gyrfudiosk vyfuhidjs ygfeijds",
-            price: 69,
-            image: undefined,
-        },
-    ]
+    // const menuItems: MenuFormSchema[] = [
+    //     {
+    //         name: "Biryani",
+    //         description: "lorem gyrfudiosk vyfuhidjs ygfeijds",
+    //         price: 69,
+    //         image: undefined,
+    //     },
+    //     {
+    //         name: "Momos",
+    //         description: "lorem gyrfudiosk vyfuhidjs ygfeijds",
+    //         price: 69,
+    //         image: undefined,
+    //     },
+    //     {
+    //         name: "Paneer",
+    //         description: "lorem gyrfudiosk vyfuhidjs ygfeijds",
+    //         price: 69,
+    //         image: undefined,
+    //     },
+    // ]
 
     return (
         <div className="max-w-6xl mx-auto my-10">
@@ -170,13 +193,13 @@ const AddMenu = () => {
                 </Dialog>
 
             </div>
-            {menuItems.map((menu: MenuFormSchema, idx: number) => (
+            {restaurant?.menus.map((menu: any, idx: number) => (
                 <div key={idx} className="mt-6 space-y-4 hover:shadow-lg">
                     <div className="flex flex-col md:flex-row md:items-center md:space-x-4 md:p-4 p-2 shadow-md rounded-lg border">
                         <img
-                            src="https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141352.jpg"
+                            src={menu.image}
                             alt="Item Image"
-                            className="md:h-24 md:w-24 h-16 w-full object-cover rounded-lg"
+                            className="md:h-24 md:w-24 h-28 w-full object-cover rounded-lg"
                         />
                         <div className="flex-1">
                             <h1 className="text-lg font-semibold text-gray-800">
@@ -200,6 +223,13 @@ const AddMenu = () => {
                     </div>
                 </div>
             ))}
+            {
+                (restaurant?.menus.length === 0) && (
+                    <div className="text-sm text-gray-600 text-center my-10">
+                        No Items to display.
+                    </div>
+                )
+            }
             <EditMenu
                 selectedMenu={selectedMenu}
                 editOpen={editOpen}
