@@ -6,15 +6,18 @@ import { ChangeEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { SignupInputState, userSignupSchema } from "@/schema/userSchema"
+import { useUserStore } from "@/store/useUserStore"
 
 
 const Signup = () => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
 
+    const {signup, loading} = useUserStore();
+
     const [errors, setErrors] = useState<Partial<SignupInputState>>({});
 
-    const loading = false;
+    // const loading = false;
 
     const [input, setInput] = useState<SignupInputState>({
         fullname: "",
@@ -28,7 +31,7 @@ const Signup = () => {
         setInput({ ...input, [name]: value });
     }
 
-    const signupSubmitHandler = async (e: FormEvent) => {
+    const signupSubmitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log(input);
 
@@ -38,6 +41,9 @@ const Signup = () => {
             setErrors(fieldErrors as Partial<SignupInputState>);
             return;
         }
+
+        // api
+        await signup(input);
 
     };
 
