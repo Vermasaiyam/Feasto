@@ -22,6 +22,19 @@ type CheckoutSessionRequest = {
     restaurantId: string
 }
 
+export const getOrders = async (req: Request, res: Response) => {
+    try {
+        const orders = await Order.find({ user: req.id }).populate('user').populate('restaurant');
+        return res.status(200).json({
+            success: true,
+            orders
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ success: false, message: "Internal server error" });
+    }
+}
+
 export const createCheckoutSession = async (req: Request, res: Response) => {
     try {
         const checkoutSessionRequest: CheckoutSessionRequest = req.body;
@@ -71,7 +84,6 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
 
     }
 }
-
 
 export const createLineItems = (checkoutSessionRequest: CheckoutSessionRequest, menuItems: any) => {
     // 1. create line items
