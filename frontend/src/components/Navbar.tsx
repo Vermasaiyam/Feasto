@@ -32,6 +32,7 @@ import {
 import { Separator } from "./ui/separator";
 import { useUserStore } from "@/store/useUserStore";
 import { useCartStore } from "@/store/useCartStore";
+import { useThemeStore } from "@/store/useThemeStore";
 
 
 
@@ -42,6 +43,7 @@ const Navbar = () => {
   // const cart = [1, 2, 3];
 
   const { cart } = useCartStore();
+  const {setTheme} = useThemeStore();
 
   return (
     <nav className="bg-white px-4 shadow-sm">
@@ -105,8 +107,8 @@ const Navbar = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem >Light</DropdownMenuItem>
-                <DropdownMenuItem >Dark</DropdownMenuItem>
+                <DropdownMenuItem onClick={()=> setTheme('light')}>Light</DropdownMenuItem>
+                <DropdownMenuItem onClick={()=> setTheme('dark')}>Dark</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -157,6 +159,7 @@ const MobileNavbar = () => {
 
   const { user, loading, logout } = useUserStore();
   const { cart } = useCartStore();
+  const {setTheme} = useThemeStore();
 
   // const cart = [1, 2, 3];
 
@@ -183,8 +186,8 @@ const MobileNavbar = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem>Light</DropdownMenuItem>
-              <DropdownMenuItem >Dark</DropdownMenuItem>
+              <DropdownMenuItem onClick={()=> setTheme('light')}>Light</DropdownMenuItem>
+              <DropdownMenuItem onClick={()=> setTheme('dark')}>Dark</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </SheetHeader>
