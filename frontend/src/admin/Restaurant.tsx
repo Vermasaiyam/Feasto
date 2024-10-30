@@ -209,7 +209,7 @@ const Restaurant = () => {
                                     Please wait
                                 </Button>
                             ) : (
-                                <Button className="bg-green hover:bg-hoverGreen">
+                                <Button className="bg-green hover:bg-hoverGreen dark:text-white">
                                     {
                                         restaurant
                                             ? "Update Your Restaurant"

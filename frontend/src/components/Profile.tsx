@@ -96,13 +96,13 @@ const Profile = () => {
                         className="font-bold text-2xl outline-none border-none focus-visible:ring-transparent"
                     />
                 </div>
-                <div className="hover:underline md:text-end text-right md:text-base text-sm hover:text-blue-500 text-gray-700">
+                <div className="hover:underline md:text-end text-right md:text-base text-sm hover:text-blue-500 text-gray-700 dark:text-yellow-50">
                     <Link to={'/reset-password'}>Reset Password</Link>
                 </div>
             </div>
             <div className="grid md:grid-cols-4 md:gap-2 gap-3 my-10 mx-4">
-                <div className="flex items-center gap-4 rounded-sm p-2 bg-gray-200">
-                    <Mail className="text-gray-500" />
+                <div className="flex items-center gap-4 rounded-sm p-2 bg-gray-200 dark:bg-[#2E3A52]">
+                    <Mail className="text-gray-500 dark:text-white" />
                     <div className="w-full">
                         <Label>Email</Label>
                         <input
@@ -110,43 +110,43 @@ const Profile = () => {
                             name="email"
                             value={profileData.email}
                             onChange={changeHandler}
-                            className="w-full text-gray-500 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
+                            className="w-full text-gray-500 dark:text-gray-300 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
                         />
                     </div>
                 </div>
-                <div className="flex items-center gap-4 rounded-sm p-2 bg-gray-200">
-                    <LocateIcon className="text-gray-500" />
+                <div className="flex items-center gap-4 rounded-sm p-2 bg-gray-200 dark:bg-[#2E3A52]">
+                    <LocateIcon className="text-gray-500 dark:text-white" />
                     <div className="w-full">
                         <Label>Address</Label>
                         <input
                             name="address"
                             value={profileData.address}
                             onChange={changeHandler}
-                            className="w-full text-gray-600 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
+                            className="w-full text-gray-600  dark:text-white bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
                         />
                     </div>
                 </div>
-                <div className="flex items-center gap-4 rounded-sm p-2 bg-gray-200">
-                    <MapPin className="text-gray-500" />
+                <div className="flex items-center gap-4 rounded-sm p-2 bg-gray-200 dark:bg-[#2E3A52]">
+                    <MapPin className="text-gray-500 dark:text-white" />
                     <div className="w-full">
                         <Label>City</Label>
                         <input
                             name="city"
                             value={profileData.city}
                             onChange={changeHandler}
-                            className="w-full text-gray-600 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
+                            className="w-full text-gray-600  dark:text-white bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
                         />
                     </div>
                 </div>
-                <div className="flex items-center gap-4 rounded-sm p-2 bg-gray-200">
-                    <MapPinnedIcon className="text-gray-500" />
+                <div className="flex items-center gap-4 rounded-sm p-2 bg-gray-200 dark:bg-[#2E3A52]">
+                    <MapPinnedIcon className="text-gray-500 dark:text-white" />
                     <div className="w-full">
                         <Label>Country</Label>
                         <input
                             name="country"
                             value={profileData.country}
                             onChange={changeHandler}
-                            className="w-full text-gray-600 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
+                            className="w-full text-gray-600  dark:text-white bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
                         />
                     </div>
                 </div>
@@ -158,7 +158,7 @@ const Profile = () => {
                         Please wait
                     </Button>
                 ) : (
-                    <Button type="submit" onClick={updateProfile} className="bg-green hover:bg-hoverGreen">Update</Button>
+                    <Button type="submit" onClick={updateProfile} className="bg-green hover:bg-hoverGreen  dark:text-white">Update</Button>
                 )}
             </div>
         </form>

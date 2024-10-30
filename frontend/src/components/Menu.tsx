@@ -17,7 +17,7 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
             </h1>
             <div className="grid md:grid-cols-3 space-y-4 md:space-y-0">
                 {menus.map((menu: MenuItem) => (
-                    <Card className="max-w-xs mx-auto shadow-lg rounded-lg overflow-hidden relative mx-2">
+                    <Card className="max-w-xs shadow-lg rounded-lg overflow-hidden relative mx-2">
                         <img src={menu.image} alt={menu.name} className="w-full h-40 object-cover" />
                         <div className="absolute top-2 left-2 bg-white rounded-full p-1 cursor-pointer">
                             <Heart className="w-5 h-5" />
@@ -27,12 +27,12 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
                                 {menu.name}
                                 {/* {menu} */}
                             </h2>
-                            <p className="text-sm text-gray-600 mt-2">
+                            <p className="text-sm text-gray-600 mt-2 dark:text-gray-400">
                                 {menu.description}
                                 {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex et perspiciatis cumque impedit similique atque. */}
                             </p>
                             <div className="flex flex-row justify-between items-center mt-4">
-                                <h3 className="text-lg font-bold text-green">
+                                <h3 className="text-lg font-bold text-green dark:text-yellow-100">
                                     ₹{menu.price}
                                     {/* ₹150 */}
                                 </h3>
@@ -43,7 +43,7 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
                                         addToCart(menu);
                                         // navigate("/cart");
                                     }}
-                                    className="rounded-full border border-green text-green hover:bg-green hover:text-white"
+                                    className="rounded-full border border-green dark:border-yellow-50 dark:text-yellow-50 text-green hover:bg-green hover:text-white"
                                 >
                                     Add to Cart
                                 </Button>

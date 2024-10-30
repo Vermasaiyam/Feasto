@@ -43,7 +43,7 @@ const RestaurantPage = () => {
                                 <Timer className="w-5 h-5" />
                                 <h1 className="flex items-center gap-2 font-medium">
                                     Delivery Time:
-                                    <span className="text-green">
+                                    <span className="text-green dark:text-yellow-100">
                                         {singleRestaurant?.deliveryTime || "NA"} mins
                                         {/* 30 mins */}
                                     </span>

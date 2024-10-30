@@ -78,7 +78,7 @@ const Success = () => {
                     ))}
                 </div>
                 <Link to="/cart">
-                    <Button className="bg-green hover:bg-hoverGreen w-full py-3 rounded-md shadow-lg">
+                    <Button className="bg-green hover:bg-hoverGreen dark:text-white w-full py-3 rounded-md shadow-lg">
                         Continue Shopping
                     </Button>
                 </Link>

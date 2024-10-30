@@ -55,7 +55,7 @@ const SearchPage = () => {
                             onClick={() =>
                                 searchRestaurant(params.id!, searchQuery, appliedFilter)
                             }
-                            className="bg-green hover:bg-hoverGreen"
+                            className="bg-green hover:bg-hoverGreen dark:text-white"
                         >
                             Search
                         </Button>
@@ -74,7 +74,7 @@ const SearchPage = () => {
                                             className="relative inline-flex items-center max-w-full"
                                         >
                                             <Badge
-                                                className="text-darkGreen rounded-md hover:cursor-pointer pr-6 whitespace-nowrap"
+                                                className="text-darkGreen dark:text-yellow-100 rounded-md hover:cursor-pointer pr-6 whitespace-nowrap"
                                                 variant="outline"
                                             >
                                                 {selectedFilter}
@@ -82,7 +82,7 @@ const SearchPage = () => {
                                             <X
                                                 onClick={() => setAppliedFilter(selectedFilter)}
                                                 size={16}
-                                                className="absolute text-darkGreen right-1 hover:cursor-pointer"
+                                                className="absolute text-darkGreen dark:text-yellow-100 right-1 hover:cursor-pointer"
                                             />
                                         </div>
                                     )
@@ -153,14 +153,14 @@ const SearchPage = () => {
                                                 )}
                                                 {
                                                     restaurant.cuisines.length > 3 && (
-                                                        <span className="text-xs text-gray-600 my-auto">+ {restaurant.cuisines.length - 3} more</span>
+                                                        <span className="text-xs text-gray-600 my-auto  dark:text-yellow-100">+ {restaurant.cuisines.length - 3} more</span>
                                                     )
                                                 }
                                             </div>
                                         </CardContent>
                                         <CardFooter className="p-4 border-t dark:border-t-gray-700 border-t-gray-100 text-white flex justify-end">
                                             <Link to={`/restaurant/${restaurant._id}`}>
-                                                <Button className="bg-green hover:bg-hoverGreen font-semibold py-2 px-4 rounded-full shadow-md transition-colors duration-200">
+                                                <Button className="bg-green hover:bg-hoverGreen dark:text-white font-semibold py-2 px-4 rounded-full shadow-md transition-colors duration-200">
                                                     View Menus
                                                 </Button>
                                             </Link>
@@ -227,7 +227,7 @@ const NoResultFound = ({ searchText }: { searchText: string }) => {
                 with a different term.
             </p>
             <Link to="/">
-                <Button className="mt-4 bg-green hover:bg-hoverGreen">
+                <Button className="mt-4 bg-green hover:bg-hoverGreen dark:text-white">
                     Go Back to Home
                 </Button>
             </Link>

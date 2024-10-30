@@ -100,7 +100,7 @@ const AddMenu = () => {
                 </h1>
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger>
-                        <Button className="bg-green hover:bg-hoverGreen">
+                        <Button className="bg-green hover:bg-hoverGreen dark:text-white">
                             <Plus className="mr-2" />
                             Add Item
                         </Button>
@@ -178,12 +178,12 @@ const AddMenu = () => {
                             </div>
                             <DialogFooter className="mt-5">
                                 {loading ? (
-                                    <Button disabled className="w-full bg-green hover:bg-hoverGreen">
+                                    <Button disabled className="w-full bg-green hover:bg-hoverGreen dark:text-white">
                                         <Loader2 className="mr-2 w-4 h-4 animate-spin" />
                                         Please wait
                                     </Button>
                                 ) : (
-                                    <Button className="w-full bg-green hover:bg-hoverGreen">
+                                    <Button className="w-full bg-green hover:bg-hoverGreen dark:text-white">
                                         Submit
                                     </Button>
                                 )}
@@ -202,12 +202,12 @@ const AddMenu = () => {
                             className="md:h-24 md:w-24 h-28 w-full object-cover rounded-lg"
                         />
                         <div className="flex-1">
-                            <h1 className="text-lg font-semibold text-gray-800">
+                            <h1 className="text-lg font-semibold text-gray-800 dark:text-white">
                                 {menu.name}
                             </h1>
-                            <p className="text-sm tex-gray-600 mt-1">{menu.description}</p>
+                            <p className="text-sm text-gray-600 mt-1 dark:text-gray-400">{menu.description}</p>
                             <h2 className="text-md font-semibold mt-2 flex items-center">
-                                Price: <span className="text-green flex items-center mx-2">₹{menu.price}</span>
+                                Price: <span className="text-green dark:text-yellow-100 flex items-center mx-2">₹{menu.price}</span>
                             </h2>
                         </div>
                         <Button
@@ -216,7 +216,7 @@ const AddMenu = () => {
                                 setEditOpen(true);
                             }}
                             size={"sm"}
-                            className="bg-green hover:bg-hoverGreen mt-2"
+                            className="bg-green hover:bg-hoverGreen mt-2 dark:text-white"
                         >
                             Edit
                         </Button>

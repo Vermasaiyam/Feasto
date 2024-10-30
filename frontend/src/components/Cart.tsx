@@ -44,12 +44,12 @@ const Cart = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="text-darkGreen text-lg">Items</TableHead>
-                                    <TableHead className="text-darkGreen text-lg">Title</TableHead>
-                                    <TableHead className="text-darkGreen text-lg">Price</TableHead>
-                                    <TableHead className="text-darkGreen text-lg">Quantity</TableHead>
-                                    <TableHead className="text-darkGreen text-lg">Total</TableHead>
-                                    <TableHead className="text-right text-darkGreen text-lg">Remove</TableHead>
+                                    <TableHead className="text-darkGreen dark:text-yellow-50 text-lg">Items</TableHead>
+                                    <TableHead className="text-darkGreen dark:text-yellow-50 text-lg">Title</TableHead>
+                                    <TableHead className="text-darkGreen dark:text-yellow-50 text-lg">Price</TableHead>
+                                    <TableHead className="text-darkGreen dark:text-yellow-50 text-lg">Quantity</TableHead>
+                                    <TableHead className="text-darkGreen dark:text-yellow-50 text-lg">Total</TableHead>
+                                    <TableHead className="text-right text-darkGreen dark:text-yellow-50 text-lg">Remove</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -117,7 +117,7 @@ const Cart = () => {
                         <div className="flex justify-end my-5">
                             <Button
                                 onClick={() => setOpen(true)}
-                                className="bg-green hover:bg-hoverGreen"
+                                className="bg-green hover:bg-hoverGreen dark:text-white"
                                 disabled={cart.length === 0}
                             >
                                 Proceed To Checkout

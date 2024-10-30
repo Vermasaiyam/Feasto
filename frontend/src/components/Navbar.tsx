@@ -46,7 +46,7 @@ const Navbar = () => {
   const {setTheme} = useThemeStore();
 
   return (
-    <nav className="bg-white px-4 shadow-sm">
+    <nav className="bg-white dark:bg-[#020817] px-4 shadow-sm">
       <div className="container flex justify-between items-center mx-auto">
         {/* Logo */}
         <Link to={'/'} className="flex items-center">
