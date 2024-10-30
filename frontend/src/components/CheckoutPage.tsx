@@ -10,6 +10,9 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useUserStore } from "@/store/useUserStore";
+import { useCartStore } from "@/store/useCartStore";
+import { useRestaurantStore } from "@/store/useRestaurantStore";
 
 const CheckoutPage = ({
     open,
@@ -18,17 +21,17 @@ const CheckoutPage = ({
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-    // const { user } = useUserStore();
+    const { user } = useUserStore();
     const loading = false;
-    const user = {
-        fullname: "Saiyam Verma",
-        email: "vermasaiyam9@gmail.com",
-        address: "meerut",
-        city: "Meerut",
-        country: "India",
-        profilePicture: "",
-        contact: 7251859585,
-    }
+    // const user = {
+    //     fullname: "Saiyam Verma",
+    //     email: "vermasaiyam9@gmail.com",
+    //     address: "meerut",
+    //     city: "Meerut",
+    //     country: "India",
+    //     profilePicture: "",
+    //     contact: 7251859585,
+    // }
     const [input, setInput] = useState({
         name: user?.fullname || "",
         email: user?.email || "",
@@ -37,8 +40,8 @@ const CheckoutPage = ({
         city: user?.city || "",
         country: user?.country || "",
     });
-    // const { cart } = useCartStore();
-    // const { restaurant } = useRestaurantStore();
+    const { cart } = useCartStore();
+    const { restaurant } = useRestaurantStore();
     // const { createCheckoutSession, loading } = useOrderStore();
     const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
