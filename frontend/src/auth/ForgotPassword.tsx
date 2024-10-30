@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useUserStore } from "@/store/useUserStore";
 import { Loader2, Mail } from "lucide-react"
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,11 +8,23 @@ import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState<string>("");
-    const loading =  false;
+    // const loading = false;
+    
+    const {forgotPassword, loading} = useUserStore();
+
+    const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            await forgotPassword(email);
+            // navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div className="flex items-center justify-center min-h-screen w-full">
-            <form className="flex flex-col gap-5 md:p-8 w-full max-w-md rounded-lg md:border border-gray-200 mx-4 shadow-sm">
+            <form onSubmit={submitHandler} className="flex flex-col gap-5 md:p-8 w-full max-w-md rounded-lg md:border border-gray-200 mx-4 shadow-sm">
                 <div className="text-center">
                     <h1 className="font-extrabold text-2xl mb-2 text-hoverGreen dark:text-yellow-50">Forgot Password</h1>
                     <p className="text-sm text-gray-600 dark:text-gray-400">Enter your email address to reset your password</p>
