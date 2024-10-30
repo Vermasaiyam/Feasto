@@ -13,6 +13,8 @@ import { useState } from "react";
 import { useUserStore } from "@/store/useUserStore";
 import { useCartStore } from "@/store/useCartStore";
 import { useRestaurantStore } from "@/store/useRestaurantStore";
+import { CheckoutSessionRequest } from "@/types/orderType";
+import { useOrderStore } from "@/store/useOrderStore";
 
 const CheckoutPage = ({
     open,
@@ -22,7 +24,7 @@ const CheckoutPage = ({
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const { user } = useUserStore();
-    const loading = false;
+    // const loading = false;
     // const user = {
     //     fullname: "Saiyam Verma",
     //     email: "vermasaiyam9@gmail.com",
@@ -42,7 +44,7 @@ const CheckoutPage = ({
     });
     const { cart } = useCartStore();
     const { restaurant } = useRestaurantStore();
-    // const { createCheckoutSession, loading } = useOrderStore();
+    const { createCheckoutSession, loading } = useOrderStore();
     const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setInput({ ...input, [name]: value });
@@ -50,6 +52,22 @@ const CheckoutPage = ({
     const checkoutHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        try {
+            const checkoutData: CheckoutSessionRequest = {
+                cartItems: cart.map((cartItem) => ({
+                    menuId: cartItem._id,
+                    name: cartItem.name,
+                    image: cartItem.image,
+                    price: cartItem.price.toString(),
+                    quantity: cartItem.quantity.toString(),
+                })),
+                deliveryDetails: input,
+                restaurantId: restaurant?._id as string,
+            };
+            await createCheckoutSession(checkoutData);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -126,7 +144,7 @@ const CheckoutPage = ({
                             </Button>
                         ) : (
                             <Button className="bg-green hover:bg-hoverGreen">
-                                Continue To Payment
+                                Pay Now
                             </Button>
                         )}
                     </DialogFooter>
