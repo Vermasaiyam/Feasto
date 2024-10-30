@@ -19,7 +19,7 @@ const RestaurantPage = () => {
     return (
         <div className="max-w-6xl mx-auto my-10 min-h-[60vh]">
             <div className="w-full mx-2">
-                <div className="relative w-full h-32 md:h-64 lg:h-72">
+                <div className="relative w-full h-32 md:h-64 lg:h-72 ">
                     <img
                         src={singleRestaurant?.imageUrl || "Loading..."}
                         // src="bg.png"
@@ -33,7 +33,7 @@ const RestaurantPage = () => {
                             {singleRestaurant?.restaurantName || "Loading..."}
                             {/* Pappi Dhaba */}
                         </h1>
-                        <div className="flex gap-2 my-2">
+                        <div className="flex gap-2 my-2 flex-wrap">
                             {singleRestaurant?.cuisines.map((cuisine: string, idx: number) => (
                                 <Badge key={idx}>{cuisine}</Badge>
                             ))}

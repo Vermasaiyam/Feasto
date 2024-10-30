@@ -14,6 +14,7 @@ import { useState } from "react";
 import CheckoutPage from "./CheckoutPage";
 import { useCartStore } from "@/store/useCartStore";
 import { CartItem } from "@/types/cartType";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [open, setOpen] = useState<boolean>(false);
@@ -29,9 +30,11 @@ const Cart = () => {
                 cart.length === 0 ? (
                     <div className="flex flex-col items-center justify-center gap-4 my-28">
                         <span className="text-gray-600 md:text-base text-sm">No items in the cart.</span>
-                        <Button className="bg-green hover:bg-hoverGreen">
-                            Order Now
-                        </Button>
+                        <Link to={'/'}>
+                            <Button className="bg-green hover:bg-hoverGreen">
+                                Order Now
+                            </Button>
+                        </Link>
                     </div>
                 ) : (
                     <div className="">

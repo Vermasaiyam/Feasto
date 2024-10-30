@@ -1,13 +1,14 @@
 import { Heart } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { MenuItem } from "@/types/restaurantType";
+import { useCartStore } from "@/store/useCartStore";
 
 const Menu = ({ menus }: { menus: MenuItem[] }) => {
     
-//   const { addToCart } = useCartStore();
-  const navigate = useNavigate();
+  const { addToCart } = useCartStore();
+//   const navigate = useNavigate();
 
     return (
         <div className="md:p-4">
@@ -39,7 +40,7 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
                                 <Button
                                     variant={"outline"}
                                     onClick={() => {
-                                        // addToCart(menu);
+                                        addToCart(menu);
                                         // navigate("/cart");
                                     }}
                                     className="rounded-full border border-green text-green hover:bg-green hover:text-white"
