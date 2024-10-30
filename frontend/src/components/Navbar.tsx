@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/sheet"
 import { Separator } from "./ui/separator";
 import { useUserStore } from "@/store/useUserStore";
+import { useCartStore } from "@/store/useCartStore";
 
 
 
@@ -38,7 +39,9 @@ const Navbar = () => {
   const { user, logout } = useUserStore();
   // const admin: boolean = true;
   // const loading: boolean = false;
-  const cart = [1, 2, 3];
+  // const cart = [1, 2, 3];
+
+  const { cart } = useCartStore();
 
   return (
     <nav className="bg-white px-4 shadow-sm">
@@ -153,8 +156,9 @@ const MobileNavbar = () => {
   // const { setTheme } = useThemeStore();
 
   const { user, loading, logout } = useUserStore();
+  const { cart } = useCartStore();
 
-  const cart = [1, 2, 3];
+  // const cart = [1, 2, 3];
 
   return (
     <Sheet>
@@ -215,6 +219,9 @@ const MobileNavbar = () => {
             <ShoppingCart />
             <span>Cart ({cart.length})</span>
           </Link>
+          <div className="my-2">
+            <Separator />
+          </div>
           {user?.admin && (
             <>
               <Link
