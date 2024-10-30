@@ -3,7 +3,7 @@ import axios from "axios";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const API_END_POINT = "http://localhost:3000/api/order"
+const API_END_POINT = "https://feasto-3uh7.onrender.com/api/order"
 axios.defaults.withCredentials = true;
 
 export const useOrderStore = create<OrderState>()(persist((set => ({

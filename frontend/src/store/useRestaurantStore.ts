@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const API_END_POINT = "http://localhost:3000/api/restaurant"
+const API_END_POINT = "https://feasto-3uh7.onrender.com/api/restaurant"
 axios.defaults.withCredentials = true;
 
 // <RestaurantState>
