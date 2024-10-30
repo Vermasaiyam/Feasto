@@ -70,9 +70,10 @@ const Success = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <Separator className="my-4" />
+                                    <Separator className="mt-4" />
                                 </div>
                             ))}
+                            <Separator className="mb-4" />
                         </div>
                     ))}
                 </div>
