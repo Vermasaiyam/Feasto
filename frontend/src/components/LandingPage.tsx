@@ -1,27 +1,46 @@
 import { Button } from "@chakra-ui/icons"
 import { Search } from "lucide-react"
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { useNavigate } from "react-router-dom";
 import HelpingSection from "./HelpingSection";
+import Typed from 'typed.js';
 
 const LandingPage = () => {
     const [searchText, setSearchText] = useState<string>("");
     const navigate = useNavigate();
 
-    const keyDown = (e: React.KeyboardEvent<HTMLInputElement>)=>{
-        if(e.key === 'Enter'){
+    const keyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
             navigate(`/search/${searchText}`);
         }
     }
+
+    const typedElement = useRef<HTMLSpanElement>(null);
+
+    useEffect(() => {
+        const options = {
+            strings: ["The Food", "The Love", "The Taste", "The Thunder"],
+            loop: true,
+            typeSpeed: 100,
+            backSpeed: 100,
+            backDelay: 1000,
+        };
+
+        const typed = new Typed(typedElement.current!, options);
+
+        return () => {
+            typed.destroy();
+        };
+    }, []);
 
     return (
         <div className="">
             <div className="flex flex-col md:flex-row max-w-8xl lg:mx-20 md:mx-12 mx-4 py-4 px-6 bg-lightGreen dark:bg-[#2E3A52] md:p-10 rounded-lg items-center justify-around m-4 gap-20 box-border">
                 <div className="flex flex-1 flex-col lg:gap-10 md:gap-7 gap-5 md:w-[40%]">
                     <div className="flex flex-col md:gap-5 gap-2">
-                        <h1 className="md:font-bold font-bold lg:leading-none md:leading-tight lg:font-extrabold md:text-5xl text-4xl">
-                            Fastest In Delivering The Food
+                        <h1 className="md:font-bold font-bold lg:leading-none md:leading-loose lg:font-extrabold md:text-5xl text-4xl">
+                            Fastest In Delivering <span ref={typedElement}></span>
                         </h1>
                         <p className="text-gray-500 dark:text-white">
                             Satisfy Your Cravings with a Click!
@@ -48,7 +67,7 @@ const LandingPage = () => {
                     />
                 </div>
             </div>
-            <HelpingSection/>
+            <HelpingSection />
         </div>
     )
 }

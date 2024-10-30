@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { IndianRupee, Loader2, Plus } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
 import { FormEvent, useState } from "react";
 import EditMenu from "./EditMenu";
 import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
