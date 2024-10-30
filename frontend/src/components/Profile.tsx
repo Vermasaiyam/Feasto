@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { useRef, useState } from "react";
 import { Label } from "./ui/label";
 import { useUserStore } from "@/store/useUserStore";
+import { Link } from "react-router-dom";
 
 
 const Profile = () => {
@@ -68,7 +69,7 @@ const Profile = () => {
 
     return (
         <form className="max-w-7xl md:mx-auto my-5 mx-4" onSubmit={updateProfileHandler}>
-            <div className="flex items-center justify-between ml-4">
+            <div className="flex md:flex-row flex-col md:items-center md:justify-between mx-4">
                 <div className="flex items-center gap-2">
                     <Avatar className="relative md:w-28 md:h-28 w-20 h-20">
                         <AvatarImage src={selectedProfilePicture} />
@@ -94,6 +95,9 @@ const Profile = () => {
                         onChange={changeHandler}
                         className="font-bold text-2xl outline-none border-none focus-visible:ring-transparent"
                     />
+                </div>
+                <div className="hover:underline md:text-end text-right md:text-base text-sm hover:text-blue-500 text-gray-700">
+                    <Link to={'/reset-password'}>Reset Password</Link>
                 </div>
             </div>
             <div className="grid md:grid-cols-4 md:gap-2 gap-3 my-10 mx-4">
