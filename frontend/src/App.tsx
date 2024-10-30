@@ -125,7 +125,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path: '/verify-email',
-    element: <VerifyEmail />
+    element: <AuthenticatedUser><VerifyEmail /></AuthenticatedUser>,
   },
   // Under construction page
   {

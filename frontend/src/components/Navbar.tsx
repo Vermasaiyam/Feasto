@@ -51,7 +51,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link to={'/'} className="flex items-center">
           <img src="/logo.png" alt="Feasto Logo" className="md:h-20 h-16 mr-0" />
-          <span className="md:font-bold md:text-xl font-semibold text-lg text-hoverGreen">FEASTO</span>
+          <span className="md:font-bold md:text-xl font-semibold text-lg text-hoverGreen dark:text-yellow-100">FEASTO</span>
         </Link>
 
         {/* Desktop Menu */}
