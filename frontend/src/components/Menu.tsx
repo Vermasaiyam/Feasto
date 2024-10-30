@@ -17,7 +17,7 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
             </h1>
             <div className="grid md:grid-cols-3 space-y-4 md:space-y-0">
                 {menus.map((menu: MenuItem) => (
-                    <Card className="max-w-xs mx-auto shadow-lg rounded-lg overflow-hidden relative">
+                    <Card className="max-w-xs mx-auto shadow-lg rounded-lg overflow-hidden relative mx-2">
                         <img src={menu.image} alt={menu.name} className="w-full h-40 object-cover" />
                         <div className="absolute top-2 left-2 bg-white rounded-full p-1 cursor-pointer">
                             <Heart className="w-5 h-5" />

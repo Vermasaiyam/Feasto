@@ -85,27 +85,6 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
     }
 }
 
-export const createLineItems = (checkoutSessionRequest: CheckoutSessionRequest, menuItems: any) => {
-    // 1. create line items
-    const lineItems = checkoutSessionRequest.cartItems.map((cartItem) => {
-        const menuItem = menuItems.find((item: any) => item._id.toString() === cartItem.menuId);
-        if (!menuItem) throw new Error(`Menu Item id not found.`);
-
-        return {
-            price_data: {
-                currency: 'inr',
-                product_data: {
-                    name: menuItem.name,
-                    images: [menuItem.image],
-                },
-                unit_amount: menuItem.price * 100
-            },
-            quantity: cartItem.quantity,
-        }
-    })
-    // 2. return lineItems
-    return lineItems;
-}
 
 export const stripeWebhook = async (req: Request, res: Response) => {
     let event;
@@ -155,3 +134,26 @@ export const stripeWebhook = async (req: Request, res: Response) => {
     // Send a 200 response to acknowledge receipt of the event
     res.status(200).send();
 };
+
+
+export const createLineItems = (checkoutSessionRequest: CheckoutSessionRequest, menuItems: any) => {
+    // 1. create line items
+    const lineItems = checkoutSessionRequest.cartItems.map((cartItem) => {
+        const menuItem = menuItems.find((item: any) => item._id.toString() === cartItem.menuId);
+        if (!menuItem) throw new Error(`Menu Item id not found.`);
+
+        return {
+            price_data: {
+                currency: 'inr',
+                product_data: {
+                    name: menuItem.name,
+                    images: [menuItem.image],
+                },
+                unit_amount: menuItem.price * 100
+            },
+            quantity: cartItem.quantity,
+        }
+    })
+    // 2. return lineItems
+    return lineItems;
+}

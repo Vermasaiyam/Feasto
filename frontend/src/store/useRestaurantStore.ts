@@ -1,4 +1,5 @@
 
+
 import { Orders } from "@/types/orderType";
 import { MenuItem, RestaurantState } from "@/types/restaurantType";
 import axios from "axios";
@@ -141,6 +142,7 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
                     'Content-Type': 'application/json'
                 }
             });
+            
             if (response.data.success) {
                 const updatedOrder = get().restaurantOrder.map((order: Orders) => {
                     return order._id === orderId ? { ...order, status: response.data.status } : order;
