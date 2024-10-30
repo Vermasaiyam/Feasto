@@ -110,7 +110,7 @@ const Profile = () => {
                             name="email"
                             value={profileData.email}
                             onChange={changeHandler}
-                            className="w-full text-gray-600 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
+                            className="w-full text-gray-500 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
                         />
                     </div>
                 </div>
