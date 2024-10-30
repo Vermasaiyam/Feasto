@@ -60,7 +60,7 @@ const Signup = () => {
                 className="md:p-8 w-full max-w-md rounded-lg md:border border-gray-200 mx-4 shadow-sm"
             >
                 <div className="mb-4 text-center">
-                    <h1 className="font-bold text-2xl text-hoverGreen">SIGNUP</h1>
+                    <h1 className="font-bold text-2xl text-hoverGreen dark:text-white">SIGNUP</h1>
                 </div>
                 <div className="mb-4">
                     <div className="relative">
@@ -130,7 +130,7 @@ const Signup = () => {
                             <span className="text-xs text-red-500">{errors.password}</span>
                         )}
                         <button
-                            className="absolute inset-y-0 right-0 h-10 flex items-center px-3 bg-slate-100 focus:outline-none"
+                            className="absolute inset-y-0 right-0 h-10 flex items-center px-3 bg-slate-100 dark:bg-[#2E3A52] focus:outline-none"
                             onClick={(e) => {
                                 e.preventDefault();
                                 handleClick();
@@ -143,13 +143,13 @@ const Signup = () => {
 
                 <div className="mb-5">
                     {loading ? (
-                        <Button disabled className="w-full bg-green hover:bg-hoverGreen">
+                        <Button disabled className="w-full bg-green hover:bg-hoverGreen dark:text-white">
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
                         </Button>
                     ) : (
                         <Button
                             type="submit"
-                            className="w-full bg-green hover:bg-hoverGreen"
+                            className="w-full bg-green hover:bg-hoverGreen dark:text-white"
                         >
                             Signup
                         </Button>

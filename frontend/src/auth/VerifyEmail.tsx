@@ -53,8 +53,8 @@ const VerifyEmail = () => {
         <div className="flex items-center justify-center h-screen w-full">
             <div className="p-8 rounded-md w-full max-w-md flex flex-col gap-10 border border-gray-200">
                 <div className="text-center">
-                    <h1 className="font-extrabold text-2xl text-hoverGreen">Verify your email</h1>
-                    <p className="text-sm text-gray-600">
+                    <h1 className="font-extrabold text-2xl text-hoverGreen dark:text-yellow-50">Verify your email</h1>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                         Enter the 6 digit code sent to your email address
                     </p>
                 </div>
@@ -83,13 +83,13 @@ const VerifyEmail = () => {
                         loading ? (
                             <Button
                                 disabled
-                                className="bg-green hover:bg-hoverGreen mt-6 w-full"
+                                className="bg-green hover:bg-hoverGreen mt-6 w-full dark:text-white"
                             >
                                 <Loader2 className="mr-2 w-4 h-4 animate-spin" />
                                 Please wait
                             </Button>
                         ) : (
-                            <Button className="bg-green hover:bg-hoverGreen mt-6 w-full">
+                            <Button className="bg-green hover:bg-hoverGreen mt-6 w-full dark:text-white">
                                 Verify
                             </Button>
                         )
