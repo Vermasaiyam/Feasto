@@ -27,6 +27,7 @@ export type RestaurantState = {
     loading: boolean;
     restaurant: Restaurant | null;
     searchedRestaurant: SearchedRestaurant | null;
+    allRestaurants: SearchedRestaurant | null;
     appliedFilter: string[];
     singleRestaurant: Restaurant | null,
     restaurantOrder: Orders[],
@@ -41,4 +42,5 @@ export type RestaurantState = {
     getSingleRestaurant: (restaurantId: string) => Promise<void>;
     getRestaurantOrders: () => Promise<void>;
     updateRestaurantOrder: (orderId: string, status: string) => Promise<void>;
+    fetchAllRestaurants: () => Promise<void>;
 }

@@ -16,6 +16,7 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
     loading: false,
     restaurant: null,
     searchedRestaurant: null,
+    allRestaurants: null,
     appliedFilter: [],
     singleRestaurant: null,
     restaurantOrder: [],
@@ -91,7 +92,7 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
     },
     updateMenuToRestaurant: (updatedMenu: MenuItem) => {
         set((state: any) => {
-            
+
             if (state.restaurant) {
                 const updatedMenuList = state.restaurant.menus.map((menu: any) => menu._id === updatedMenu._id ? updatedMenu : menu);
                 return {
@@ -121,7 +122,7 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
             if (response.data.success) {
                 set({ singleRestaurant: response.data.restaurant })
             }
-        } catch (error) { 
+        } catch (error) {
             console.log(error);
         }
     },
@@ -142,7 +143,7 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
                     'Content-Type': 'application/json'
                 }
             });
-            
+
             if (response.data.success) {
                 const updatedOrder = get().restaurantOrder.map((order: Orders) => {
                     return order._id === orderId ? { ...order, status: response.data.status } : order;
@@ -152,6 +153,26 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
             }
         } catch (error: any) {
             toast.error(error.response.data.message);
+        }
+    },
+    fetchAllRestaurants: async () => {
+        try {
+            set({ loading: true });
+
+            const response = await axios.get(`${API_END_POINT}/fetchAllRestaurants`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (response.data.success) {
+                set({ loading: false, restaurant: response.data.restaurant });
+            }
+        } catch (error: any) {
+            if (error.response.status === 404) {
+                set({ restaurant: null });
+            }
+            set({ loading: false });
         }
     }
 
