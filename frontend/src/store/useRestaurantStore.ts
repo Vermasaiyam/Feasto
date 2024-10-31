@@ -174,6 +174,8 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
             if (error.response.status === 404) {
                 set({ restaurant: null });
             }
+            console.log("Error",error);
+            
             set({ loading: false });
         }
     }
