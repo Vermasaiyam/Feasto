@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { Loader2, LockKeyhole, Mail, PhoneOutgoing, User } from "lucide-react"
-import { ChangeEvent, useRef, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { SignupInputState, userSignupSchema } from "@/schema/userSchema"
