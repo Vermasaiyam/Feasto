@@ -219,6 +219,6 @@ export const fetchAllRestaurants = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.error("Error fetching restaurants:", error); 
-        return res.status(500).json({ message: "Internal Server Error." });
+        return res.status(500).json({ message: error || "Internal Server Error." });
     }
 };
