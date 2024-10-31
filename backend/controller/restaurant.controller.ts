@@ -203,17 +203,19 @@ export const getSingleRestaurant = async (req: Request, res: Response) => {
 
 export const fetchAllRestaurants = async (req: Request, res: Response) => {
     try {
-        const restaurants = await Restaurant.find().populate('menus');
-        if (!restaurants || restaurants.length === 0) {
+        const restaurant = await Restaurant.find().populate('menus');
+        console.log("from backend",restaurant);
+        
+        if (!restaurant || restaurant.length === 0) {
             return res.status(404).json({
                 success: false,
-                restaurants: [],
+                restaurant: [],
                 message: "No restaurants found."
             });
         }
         return res.status(200).json({
             success: true,
-            restaurants
+            restaurant
         });
     } catch (error) {
         console.error("Error fetching restaurants:", error); 

@@ -164,9 +164,11 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
                     'Content-Type': 'application/json'
                 }
             });
+            console.log("Response", response);
+            
             
             if (response.data.success) {
-                set({ loading: false, restaurant: response.data.restaurant });
+                set({ loading: false, allRestaurants: response.data.restaurant });
             }
         } catch (error: any) {
             if (error.response.status === 404) {
