@@ -19,6 +19,7 @@ import { useUserStore } from './store/useUserStore'
 import { useEffect } from 'react'
 import Loading from './components/Loading'
 import { useThemeStore } from './store/useThemeStore'
+import AllRestaurants from './components/AllRestaurants'
 
 
 const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
@@ -85,6 +86,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/order/status",
         element: <Success />
+      },
+      {
+        path: "/restaurants",
+        element: <AllRestaurants />
       },
       //admin
       {
