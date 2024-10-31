@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { Loader2, LockKeyhole, Mail, PhoneOutgoing, User } from "lucide-react"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { SignupInputState, userSignupSchema } from "@/schema/userSchema"
@@ -12,6 +12,8 @@ import { useUserStore } from "@/store/useUserStore"
 const Signup = () => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
+
+    // const formRef = useRef();
 
     const navigate = useNavigate();
     const { signup, loading } = useUserStore();
@@ -56,6 +58,7 @@ const Signup = () => {
     return (
         <div className="flex items-center justify-center min-h-screen">
             <form
+                // ref={formRef}
                 onSubmit={signupSubmitHandler}
                 className="md:p-8 w-full max-w-md rounded-lg md:border border-gray-200 mx-4 shadow-sm"
             >
