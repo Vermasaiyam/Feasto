@@ -70,3 +70,37 @@ export const editMenu = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal Server Error." });
     }
 }
+
+export const deleteMenu = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const userId = req.id;
+
+
+        const menu = await Menu.findById(id);
+        if (!menu) {
+            return res.status(404).json({
+                success: false,
+                message: "Menu not found!!!"
+            });
+        }
+
+        
+        const restaurant = await Restaurant.findById(userId);
+        if (restaurant) {
+            restaurant.menus = (restaurant.menus as mongoose.Schema.Types.ObjectId[])
+                .filter((menuId) => menuId.toString() !== id) as mongoose.Schema.Types.ObjectId[];
+            await restaurant.save();
+        }
+
+        await Menu.findByIdAndDelete(id);
+
+        return res.status(200).json({
+            success: true,
+            message: "Menu deleted successfully."
+        });
+    } catch (error) {
+        // console.error("Error deleting menu:", error);
+        return res.status(500).json({ message: "Internal Server Error." });
+    }
+};

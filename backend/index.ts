@@ -41,6 +41,7 @@ app.use("/api/menu", menuRoute);
 app.use("/api/order", orderRoute);
 
 app.get("/api/restaurants",isAuthenticated,fetchAllRestaurants);
+// app.get("/api/menus",isAuthenticated,fetch);
 
 app.use(express.static(path.join(DIRNAME, "/frontend/dist")));
 app.use("*", (_, res) => {

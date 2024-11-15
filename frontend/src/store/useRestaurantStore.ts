@@ -109,6 +109,20 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
             return state;
         })
     },
+    removeMenuFromRestaurant: (menuId: string) => {
+        set((state: any) => {
+            if (state.restaurant) {
+                const updatedMenuList = state.restaurant.menus.filter((menu: any) => menu._id !== menuId);
+                return {
+                    restaurant: {
+                        ...state.restaurant,
+                        menus: updatedMenuList,
+                    }
+                };
+            }
+            return state;
+        });
+    },
     setAppliedFilter: (value: string) => {
         set((state) => {
             const isAlreadyApplied = state.appliedFilter.includes(value);
