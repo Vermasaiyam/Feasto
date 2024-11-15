@@ -18,8 +18,8 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
             <div className="grid md:grid-cols-3 space-y-4 md:space-y-0">
                 {menus.map((menu: MenuItem) => (
                     <Card className="max-w-xs shadow-lg rounded-lg overflow-hidden relative mx-2">
-                        <img src={menu.image} alt={menu.name} className="w-full h-40 object-cover" />
-                        <div className="absolute top-2 left-2 bg-white rounded-full p-1 cursor-pointer">
+                        <img src={menu.image} alt={menu.name} className="w-full h-40 object-contain" />
+                        <div className="absolute top-2 left-2 bg-white dark:bg-gray-900 rounded-full p-1 cursor-pointer">
                             <Heart className="w-5 h-5" />
                         </div>
                         <CardContent className="p-4">
@@ -27,7 +27,7 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
                                 {menu.name}
                                 {/* {menu} */}
                             </h2>
-                            <p className="text-sm text-gray-600 mt-2 dark:text-gray-400">
+                            <p className="text-sm text-gray-600 mt-2 dark:text-gray-400 line-clamp-1" title={menu.description}>
                                 {menu.description}
                                 {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex et perspiciatis cumque impedit similique atque. */}
                             </p>

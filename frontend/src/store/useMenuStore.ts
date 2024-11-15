@@ -3,27 +3,14 @@ import { toast } from "sonner";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { useRestaurantStore } from "./useRestaurantStore";
+import { MenuState } from "@/types/menuType";
 
 // const API_END_POINT = "https://feasto-3uh7.onrender.com/api/menu";
 const API_END_POINT = "http://localhost:3000/api/menu";
+const END_POINT = "http://localhost:3000/api" 
+
 axios.defaults.withCredentials = true;
 
-type Menu = {
-    _id: string;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-}
-
-type MenuState = {
-    loading: boolean,
-    menu: null,
-    allMenus: Menu[] | null,
-    createMenu: (formData: FormData) => Promise<void>;
-    editMenu: (menuId: string, formData: FormData) => Promise<void>;
-    deleteMenu: (id: string) => Promise<void>;
-}
 
 export const useMenuStore = create<MenuState>()(persist((set) => ({
     loading: false,
@@ -89,6 +76,26 @@ export const useMenuStore = create<MenuState>()(persist((set) => ({
             set({ loading: false });
         }
     },
+    fetchAllMenus: async () => {
+        try {
+            set({ loading: true });
+            console.log("start");
+
+            const response = await axios.get(`${END_POINT}/menus`);
+
+            if (response.data.success) {
+                set({ loading: false, allMenus: response.data.menu });
+            }
+        } catch (error: any) {
+            console.log("Error", error);
+            if (error.response && error.response.status === 404) {
+                set({ allMenus: null });
+            }
+            set({ loading: false });
+        } finally {
+            set({ loading: false });
+        }
+    }
 }), {
     name: "menu-name",
     storage: createJSONStorage(() => localStorage)

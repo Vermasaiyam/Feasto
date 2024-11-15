@@ -20,6 +20,7 @@ import { useEffect } from 'react'
 import Loading from './components/Loading'
 import { useThemeStore } from './store/useThemeStore'
 import AllRestaurants from './components/AllRestaurants'
+import AllMenus from './components/AllMenus'
 
 
 const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
@@ -90,6 +91,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurants",
         element: <AllRestaurants />
+      },
+      {
+        path: "/menu",
+        element: <AllMenus />
       },
       //admin
       {
