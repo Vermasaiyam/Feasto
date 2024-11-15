@@ -5,7 +5,7 @@ import crypto from "crypto";
 import cloudinary from "../utils/cloudinary";
 import { generateVerificationCode } from "../utils/generateVerificationCode";
 import { generateToken } from "../utils/generateToken";
-import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/email";
+import { sendEmail, sendResetSuccessEmail, sendWelcomeEmaill, sendPasswordResetEmail } from "../utils/sendEmail";
 
 export const signup = async (req: Request, res: Response) => {
     try {
@@ -31,7 +31,15 @@ export const signup = async (req: Request, res: Response) => {
         })
         generateToken(res, user);
 
-        await sendVerificationEmail(email, verificationToken);
+        // await sendVerificationEmail(email, verificationToken);
+        const message = `your verification code is :-\n${verificationToken} `;
+        // console.log(message);
+        await sendEmail({
+            email: user.email,
+            subject: `FEASTO - Verification Code.`,
+            message,
+            verificationToken,
+        })
 
         const userWithoutPassword = await User.findOne({ email }).select("-password");
         return res.status(201).json({
@@ -101,7 +109,16 @@ export const verifyEmail = async (req: Request, res: Response) => {
         await user.save();
 
         // send welcome email
-        await sendWelcomeEmail(user.email, user.fullname);
+        // await sendWelcomeEmail(user.email, user.fullname);
+
+        // nodemailer implementation
+        const message = `Welcome to FEASTO`;
+        await sendWelcomeEmaill({
+            email: user.email,
+            subject: `Welcome to FEASTO`,
+            message,
+            name: user.fullname,
+        })
 
         return res.status(200).json({
             success: true,
@@ -146,7 +163,19 @@ export const forgotPassword = async (req: Request, res: Response) => {
         await user.save();
 
         // send email
-        await sendPasswordResetEmail(user.email, `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`);
+        // await sendPasswordResetEmail(user.email, `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`);
+
+        const forgotPasswordToken = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
+
+        // nodemailer implementation
+        const message = `FEASTO : Forgot Password`;
+        // console.log(message);
+        await sendPasswordResetEmail({
+            email: user.email,
+            subject: `FEASTO : Forgot Password`,
+            message,
+            name: forgotPasswordToken,
+        })
 
         return res.status(200).json({
             success: true,
@@ -177,7 +206,13 @@ export const resetPassword = async (req: Request, res: Response) => {
         await user.save();
 
         // send success reset email
-        await sendResetSuccessEmail(user.email);
+        const message = `Password Reset Successfull.`;
+        // console.log(message);
+        await sendResetSuccessEmail({
+            email: user.email,
+            subject: `Password Reset Successfull.`,
+            message,
+        })
 
         return res.status(200).json({
             success: true,
@@ -196,7 +231,7 @@ export const checkAuth = async (req: Request, res: Response) => {
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: 'User not found'
+                message: 'User not found.'
             });
         };
         return res.status(200).json({
