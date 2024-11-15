@@ -27,7 +27,7 @@ export type RestaurantState = {
     loading: boolean;
     restaurant: Restaurant | null;
     searchedRestaurant: SearchedRestaurant | null;
-    allRestaurants: SearchedRestaurant | null;
+    allRestaurants: Restaurant[] | null;
     appliedFilter: string[];
     singleRestaurant: Restaurant | null,
     restaurantOrder: Orders[],

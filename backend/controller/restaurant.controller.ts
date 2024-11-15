@@ -203,8 +203,11 @@ export const getSingleRestaurant = async (req: Request, res: Response) => {
 
 export const fetchAllRestaurants = async (req: Request, res: Response) => {
     try {
-        const restaurant = await Restaurant.find().populate('menus');
-        console.log("from backend",restaurant);
+        const restaurant = await Restaurant.find().populate({
+            path: 'menus',
+            options: { createdAt: -1 }
+        });
+        // console.log("from backend",restaurant);
         
         if (!restaurant || restaurant.length === 0) {
             return res.status(404).json({

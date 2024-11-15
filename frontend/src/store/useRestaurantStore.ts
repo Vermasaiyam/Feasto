@@ -9,6 +9,8 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 // const API_END_POINT = "https://feasto-3uh7.onrender.com/api/restaurant"
 const API_END_POINT = "http://localhost:3000/api/restaurant"
+const END_POINT = "http://localhost:3000/api"
+
 axios.defaults.withCredentials = true;
 
 // <RestaurantState>
@@ -160,12 +162,12 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
         try {
             set({ loading: true });
 
-            const response = await axios.get(`${API_END_POINT}/fetchAllRestaurants`, {
+            const response = await axios.get(`${END_POINT}/restaurants`, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log("Response", response);
+            // console.log("Response", response);
             
             
             if (response.data.success) {
@@ -173,10 +175,9 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
             }
         } catch (error: any) {
             if (error.response.status === 404) {
-                set({ restaurant: null });
+                set({ allRestaurants: null });
             }
             console.log("Error",error);
-            
             set({ loading: false });
         }
     }

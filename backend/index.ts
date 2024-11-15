@@ -9,6 +9,8 @@ import restaurantRoute from "./routes/restaurant.route";
 import menuRoute from "./routes/menu.route";
 import orderRoute from "./routes/order.route";
 import path from "path";
+import { isAuthenticated } from "./middlewares/isAuthenticated";
+import { fetchAllRestaurants } from "./controller/restaurant.controller";
 
 dotenv.config();
 
@@ -37,6 +39,8 @@ app.use("/api/user", userRoute);
 app.use("/api/restaurant", restaurantRoute);
 app.use("/api/menu", menuRoute);
 app.use("/api/order", orderRoute);
+
+app.get("/api/restaurants",isAuthenticated,fetchAllRestaurants);
 
 app.use(express.static(path.join(DIRNAME, "/frontend/dist")));
 app.use("*", (_, res) => {
