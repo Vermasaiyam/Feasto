@@ -20,7 +20,10 @@ const AllMenus = () => {
     const totalPages = Math.ceil((allMenus?.length || 0) / menusPerPage);
 
     const startIndex = (currentPage - 1) * menusPerPage;
-    const currentMenus = allMenus?.slice(startIndex, startIndex + menusPerPage);
+    const currentMenus = allMenus
+        ?.slice()
+        .reverse()
+        .slice(startIndex, startIndex + menusPerPage);
 
 
     const handleNext = () => {

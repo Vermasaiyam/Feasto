@@ -6,9 +6,10 @@ import { MenuItem } from "@/types/restaurantType";
 import { useCartStore } from "@/store/useCartStore";
 
 const Menu = ({ menus }: { menus: MenuItem[] }) => {
-    
-  const { addToCart } = useCartStore();
-//   const navigate = useNavigate();
+
+    const { addToCart } = useCartStore();
+
+    const reversedMenus = menus.slice().reverse();
 
     return (
         <div className="md:p-4">
@@ -16,7 +17,7 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
                 Available Menus
             </h1>
             <div className="grid md:grid-cols-3 space-y-4 md:space-y-0">
-                {menus.map((menu: MenuItem) => (
+                {reversedMenus.map((menu: MenuItem) => (
                     <Card className="max-w-xs shadow-lg rounded-lg overflow-hidden relative mx-2">
                         <img src={menu.image} alt={menu.name} className="w-full h-40 object-contain" />
                         <div className="absolute top-2 left-2 bg-white dark:bg-gray-900 rounded-full p-1 cursor-pointer">
@@ -41,7 +42,6 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
                                     variant={"outline"}
                                     onClick={() => {
                                         addToCart(menu);
-                                        // navigate("/cart");
                                     }}
                                     className="rounded-full border border-green dark:border-yellow-50 dark:text-yellow-50 text-green hover:bg-green hover:text-white"
                                 >

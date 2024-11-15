@@ -22,7 +22,10 @@ const AllRestaurants = () => {
   const totalPages = Math.ceil((allRestaurants?.length || 0) / restaurantsPerPage);
 
   const startIndex = (currentPage - 1) * restaurantsPerPage;
-  const currentRestaurants = allRestaurants?.slice(startIndex, startIndex + restaurantsPerPage);
+  const currentRestaurants = allRestaurants
+    ?.slice()
+    .reverse()
+    .slice(startIndex, startIndex + restaurantsPerPage);
 
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -72,15 +75,15 @@ const AllRestaurants = () => {
               key={restaurant._id}
               className="bg-white dark:bg-gray-800 shadow-xl rounded-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
             >
-              <div className="relative">
+              <Link to={`/restaurant/${restaurant._id}`} className="relative">
                 <AspectRatio ratio={15 / 8}>
                   <img
                     src={restaurant.imageUrl}
                     alt={restaurant.restaurantName}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </AspectRatio>
-              </div>
+              </Link>
               <CardContent className="p-4">
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {restaurant.restaurantName}
