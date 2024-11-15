@@ -9,6 +9,7 @@ export interface IUser {
     city: string;
     country: string;
     profilePicture: string;
+    head: boolean;
     admin: boolean;
     lastLogin?: Date;
     isVerified?: boolean;
@@ -56,6 +57,7 @@ const userSchema = new mongoose.Schema<IUserDocument>({
         type: String,
         default: "",
     },
+    head: { type: Boolean, default: false },
     admin: { type: Boolean, default: false },
     // advanced authentication
     lastLogin: {
