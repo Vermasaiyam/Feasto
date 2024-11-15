@@ -4,6 +4,7 @@ export type Menu = {
     description: string;
     price: number;
     image: string;
+    restaurantName?: string;
 }
 
 export type MenuState = {

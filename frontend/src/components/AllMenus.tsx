@@ -84,6 +84,13 @@ const AllMenus = () => {
                                                 {menu.name}
                                                 {/* {menu} */}
                                             </h2>
+                                            {
+                                                menu.restaurantName && (
+                                                    <p className=" text-gray-700 mt-2 dark:text-gray-400">
+                                                        Restaurant - {menu.restaurantName}
+                                                    </p>
+                                                )
+                                            }
                                             <p className="text-sm text-gray-600 mt-2 dark:text-gray-400 line-clamp-1" title={menu.description}>
                                                 {menu.description}
                                                 {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex et perspiciatis cumque impedit similique atque. */}
