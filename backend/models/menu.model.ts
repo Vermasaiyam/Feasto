@@ -6,6 +6,8 @@ export interface IMenu {
     description: string;
     price: number;
     image: string;
+    restaurantId: mongoose.Schema.Types.ObjectId;
+    restaurantName: string;
 }
 export interface IMenuDocument extends IMenu, Document {
     createdAt: Date;
@@ -29,6 +31,15 @@ const menuSchema = new mongoose.Schema<IMenuDocument>({
         type: String,
         required: true
     },
+    restaurantId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Restaurant",
+        // required: true,
+    },
+    restaurantName: {
+        type: String,
+        required: true,
+    }
 }, { timestamps: true });
 
 export const Menu = mongoose.model("Menu", menuSchema);

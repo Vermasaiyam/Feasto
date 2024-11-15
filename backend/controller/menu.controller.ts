@@ -15,13 +15,24 @@ export const addMenu = async (req: Request, res: Response) => {
             })
         };
         const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
+
+        const restaurant = await Restaurant.findOne({ user: req.id });
+        if (!restaurant) {
+            res.status(404).json({
+                success: false,
+                message: "Restaurant not found for this user."
+            });
+            return;
+        }
+
         const menu: any = await Menu.create({
             name,
             description,
             price,
-            image: imageUrl
+            image: imageUrl,
+            restaurantId: restaurant._id,
+            restaurantName: restaurant.restaurantName,
         });
-        const restaurant = await Restaurant.findOne({ user: req.id });
         if (restaurant) {
             (restaurant.menus as mongoose.Schema.Types.ObjectId[]).push(menu._id);
             await restaurant.save();
@@ -102,5 +113,26 @@ export const deleteMenu = async (req: Request, res: Response) => {
     } catch (error) {
         // console.error("Error deleting menu:", error);
         return res.status(500).json({ message: "Internal Server Error." });
+    }
+};
+
+export const fetchAllMenus = async (req: Request, res: Response) => {
+    try {
+        const menu = await Menu.find();
+
+        if (!menu) {
+            return res.status(404).json({
+                success: false,
+                menu: [],
+                message: "No Menus found."
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            menu
+        });
+    } catch (error) {
+        return res.status(500).json({ message: error || "Internal Server Error." });
     }
 };
