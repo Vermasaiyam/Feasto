@@ -5,6 +5,8 @@ import { Input } from "./ui/input";
 import { useNavigate } from "react-router-dom";
 import HelpingSection from "./HelpingSection";
 import Typed from 'typed.js';
+import AllRestaurants from "./AllRestaurants";
+import AllMenus from "./AllMenus";
 
 const LandingPage = () => {
     const [searchText, setSearchText] = useState<string>("");
@@ -67,6 +69,17 @@ const LandingPage = () => {
                     />
                 </div>
             </div>
+
+            <div className="lg:px-10 md:px-6 px-2 pt-10">
+                <h1 className="md:text-3xl text-2xl font-semibold md:px-12 px-6">Feast Corners</h1>
+                <AllRestaurants />
+            </div>
+
+            <div className="lg:px-10 md:px-6 pt-4">
+                <h1 className="md:text-3xl text-2xl font-semibold md:px-12 px-6">Dine & Delight</h1>
+                <AllMenus />
+            </div>
+
             <HelpingSection />
         </div>
     )
