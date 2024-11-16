@@ -187,30 +187,40 @@ export const forgotPassword = async (req: Request, res: Response) => {
     }
 }
 
-export const resetPassword = async (req: Request, res: Response) => {
+export const resetPassword = async (req: Request, res: Response)=> {
     try {
-        const { token } = req.params;
-        const { newPassword } = req.body;
-        const user = await User.findOne({ resetPasswordToken: token, resetPasswordTokenExpiresAt: { $gt: Date.now() } });
+        // console.log(req.id);
+        const userId = req.id;
+        const user = await User.findById(userId);
+
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid Reset Token."
+                message: "User doesn't exist.",
             });
         }
-        //update password
+        const { oldPassword, newPassword } = req.body;
+
+        const isPasswordMatch = await bcrypt.compare(oldPassword, user.password);
+
+        if (!isPasswordMatch) {
+            return res.status(400).json({
+                success: false,
+                message: "Incorrect Password.",
+            });
+        }
+
         const hashedPassword = await bcrypt.hash(newPassword, 10);
+
         user.password = hashedPassword;
-        user.resetPasswordToken = undefined;
-        user.resetPasswordTokenExpiresAt = undefined;
         await user.save();
 
         // send success reset email
-        const message = `Password Reset Successfull.`;
+        const message = `Password Reset Successfull`;
         // console.log(message);
         await sendResetSuccessEmail({
             email: user.email,
-            subject: `Password Reset Successfull.`,
+            subject: `Password Reset Successfull`,
             message,
         })
 
