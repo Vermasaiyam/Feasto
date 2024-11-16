@@ -24,7 +24,7 @@ const RestaurantPage = () => {
                         src={singleRestaurant?.imageUrl || "Loading..."}
                         // src="bg.png"
                         alt="Restaurant Cover Image"
-                        className="object-cover w-full h-full rounded-lg shadow-lg"
+                        className="object-contain w-full h-full rounded-lg shadow-lg"
                     />
                 </div>
                 <div className="flex flex-col md:flex-row justify-between">
