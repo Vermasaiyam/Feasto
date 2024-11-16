@@ -20,7 +20,7 @@ const AllUsers = () => {
     fullname: "",
     email: "",
     contact: null,
-    Address: "",
+    address: "",
     city: "",
     country: "",
     admin: false,
