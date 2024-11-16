@@ -41,26 +41,31 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
             </h1>
 
             {/* Entries Per Page Selector */}
-            <div className="flex items-center justify-end mb-4 mx-2">
-                <label htmlFor="entriesPerPage" className="mr-2 text-gray-700 dark:text-gray-400">
-                    Number of entries:
-                </label>
-                <select
-                    id="entriesPerPage"
-                    value={entriesPerPage}
-                    onChange={(e) => {
-                        setEntriesPerPage(parseInt(e.target.value));
-                        setCurrentPage(1); // Reset to the first page on change
-                    }}
-                    className="border border-gray-300 rounded-md p-1 dark:bg-gray-800 dark:text-white"
-                >
-                    {[2, 3, 4, 5, 6, 7, 8].map((entry) => (
-                        <option key={entry} value={entry}>
-                            {entry}
-                        </option>
-                    ))}
-                </select>
-            </div>
+
+            {
+                menus.length !== 0 && (
+                    <div className="flex items-center justify-end mb-4 mx-2">
+                        <label htmlFor="entriesPerPage" className="mr-2 text-gray-700 dark:text-gray-400">
+                            Number of entries:
+                        </label>
+                        <select
+                            id="entriesPerPage"
+                            value={entriesPerPage}
+                            onChange={(e) => {
+                                setEntriesPerPage(parseInt(e.target.value));
+                                setCurrentPage(1); // Reset to the first page on change
+                            }}
+                            className="border border-gray-300 rounded-md p-1 dark:bg-gray-800 dark:text-white"
+                        >
+                            {[2, 3, 4, 5, 6, 7, 8].map((entry) => (
+                                <option key={entry} value={entry}>
+                                    {entry}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )
+            }
 
             {/* Menu Items */}
             <div className="grid md:grid-cols-3 space-y-4 md:space-y-0">
@@ -107,46 +112,56 @@ const Menu = ({ menus }: { menus: MenuItem[] }) => {
                 ))}
             </div>
 
+            {
+                menus.length === 0 && (
+                    <p className="w-full flex items-center text-gray-800 dark:text-gray-400 justify-center my-2">No Menu Yet.</p>
+                )
+            }
+
             {/* Pagination Buttons */}
-            <div className="flex justify-center overflow-y-scroll items-center mt-6 space-x-2">
-                <button
-                    onClick={() => goToPage(1)}
-                    disabled={currentPage === 1}
-                    className="px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-300 disabled:bg-gray-300"
-                >
-                    First
-                </button>
-                <button
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className="px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-300 disabled:bg-gray-300"
-                >
-                    Previous
-                </button>
-                {pageNumbers.map((page) => (
-                    <button
-                        key={page}
-                        onClick={() => goToPage(page)}
-                        className={`px-4 py-2 text-sm rounded-md ${currentPage === page ? 'bg-green text-white' : 'bg-gray-200 text-gray-700'} hover:bg-hoverGreen hover:text-white`}
-                    >
-                        {page}
-                    </button>
-                ))}
-                <button
-                    onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className="px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-300 disabled:bg-gray-300"
-                >
-                    Next
-                </button>
-                <button
-                    onClick={() => goToPage(totalPages)}
-                    disabled={currentPage === totalPages}
-                    className="px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-300 disabled:bg-gray-300"
-                >
-                    Last
-                </button>
-            </div>
+            {
+                menus.length !== 0 && (
+                    <div className="flex justify-center overflow-y-scroll items-center mt-6 space-x-2">
+                        <button
+                            onClick={() => goToPage(1)}
+                            disabled={currentPage === 1}
+                            className="px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-300 disabled:bg-gray-300"
+                        >
+                            First
+                        </button>
+                        <button
+                            onClick={() => goToPage(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-300 disabled:bg-gray-300"
+                        >
+                            Previous
+                        </button>
+                        {pageNumbers.map((page) => (
+                            <button
+                                key={page}
+                                onClick={() => goToPage(page)}
+                                className={`px-4 py-2 text-sm rounded-md ${currentPage === page ? 'bg-green text-white' : 'bg-gray-200 text-gray-700'} hover:bg-hoverGreen hover:text-white`}
+                            >
+                                {page}
+                            </button>
+                        ))}
+                        <button
+                            onClick={() => goToPage(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                            className="px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-300 disabled:bg-gray-300"
+                        >
+                            Next
+                        </button>
+                        <button
+                            onClick={() => goToPage(totalPages)}
+                            disabled={currentPage === totalPages}
+                            className="px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-600 hover:bg-gray-300 disabled:bg-gray-300"
+                        >
+                            Last
+                        </button>
+                    </div>
+                )
+            }
         </div>
     );
 };

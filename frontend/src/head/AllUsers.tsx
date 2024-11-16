@@ -10,8 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-// import ChangeUserRole from "./ChangeUserRole";
-import { useRestaurantStore } from "@/store/useRestaurantStore";
+import ChangeUserRole from "./ChangeUserRole";
+// import { useRestaurantStore } from "@/store/useRestaurantStore";
 import { Input } from "@/components/ui/input";
 
 const AllUsers = () => {
@@ -24,7 +24,6 @@ const AllUsers = () => {
     city: "",
     country: "",
     admin: false,
-    clubCounselor: false
     _id: ""
   });
 
@@ -32,7 +31,7 @@ const AllUsers = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const { allUsers, fetchAllUsers } = useUserStore();
-  const { allRestaurants, fetchAllRestaurants } = useRestaurantStore();
+//   const { allRestaurants, fetchAllRestaurants } = useRestaurantStore();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage, setEntriesPerPage] = useState(10);
@@ -40,11 +39,11 @@ const AllUsers = () => {
   useEffect(() => {
     const loadData = async () => {
       await fetchAllUsers();
-      await fetchAllRestaurants();
+    //   await fetchAllRestaurants();
       setLoading(false);
     };
     loadData();
-  }, [fetchAllUsers, fetchAllRestaurants]);
+  }, [fetchAllUsers]);
 
   const totalPages = Math.ceil((allUsers?.length || 0) / entriesPerPage);
 
@@ -209,7 +208,7 @@ const AllUsers = () => {
           fullname={updateUserDetails.fullname}
           email={updateUserDetails.email}
           admin={updateUserDetails.admin}
-          allRestaurants={allRestaurants}
+        //   allRestaurants={allRestaurants}
           userId={updateUserDetails._id}
         />
       )}
