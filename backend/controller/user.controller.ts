@@ -259,17 +259,19 @@ export const updateProfile = async (req: Request, res: Response) => {
         const userId = req.id;
         const { fullname, email, address, city, country, profilePicture } = req.body;
 
-        //cloudinary
-        let cloudResponse: any;
-        cloudResponse = await cloudinary.uploader.upload(profilePicture);
-        const updatedData = { fullname, email, address, city, country, profilePicture };
+        const updatedData: any = { fullname, email, address, city, country};
+
+        if (profilePicture) {
+            const cloudResponse = await cloudinary.uploader.upload(profilePicture);
+            updatedData.profilePicture = cloudResponse.secure_url;
+        }
 
         const user = await User.findByIdAndUpdate(userId, updatedData, { new: true }).select("-password");
 
         return res.status(200).json({
             success: true,
             user,
-            message: "Profile Updated Successfully"
+            message: "Profile Updated Successfully."
         });
     } catch (error) {
         console.error(error);
