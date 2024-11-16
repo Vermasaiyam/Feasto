@@ -38,6 +38,8 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
         } catch (error: any) {
             toast.error(error.response.data.message);
             set({ loading: false });
+        } finally {
+            set({ loading: false });
         }
     },
     getRestaurant: async () => {
@@ -51,6 +53,8 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
             if (error.response.status === 404) {
                 set({ restaurant: null });
             }
+            set({ loading: false });
+        } finally {
             set({ loading: false });
         }
     },
@@ -69,6 +73,8 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
         } catch (error: any) {
             toast.error(error.response.data.message);
             set({ loading: false });
+        } finally {
+            set({ loading: false });
         }
     },
     searchRestaurant: async (searchText: string, searchQuery: string, selectedCuisines: any) => {
@@ -85,6 +91,8 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
                 set({ loading: false, searchedRestaurant: response.data });
             }
         } catch (error) {
+            set({ loading: false });
+        } finally {
             set({ loading: false });
         }
     },
@@ -192,6 +200,8 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set, get) =
                 set({ allRestaurants: null });
             }
             console.log("Error",error);
+            set({ loading: false });
+        } finally {
             set({ loading: false });
         }
     }

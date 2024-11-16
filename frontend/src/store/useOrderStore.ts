@@ -22,6 +22,8 @@ export const useOrderStore = create<OrderState>()(persist((set => ({
             set({ loading: false });
         } catch (error) {
             set({ loading: false });
+        } finally {
+            set({ loading: false });
         }
     },
     getOrderDetails: async () => {
@@ -30,6 +32,8 @@ export const useOrderStore = create<OrderState>()(persist((set => ({
             const response = await axios.get(`${API_END_POINT}/`);
             set({ loading: false, orders: response.data.orders });
         } catch (error) {
+            set({ loading: false });
+        } finally {
             set({ loading: false });
         }
     }
