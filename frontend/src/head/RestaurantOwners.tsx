@@ -52,7 +52,7 @@ const RestaurantOwners = () => {
     }
   }, [allUsers]);
 
-  // Get club name
+  // Get restaurant name
   const getRestaurantName = (userId: string) => {
     const restaurant = allRestaurants?.find(restaurant => restaurant.user.includes(userId));
     return restaurant ? restaurant.restaurantName : "No Restaurant Registered";
@@ -122,7 +122,7 @@ const RestaurantOwners = () => {
 
         <Input
           type="text"
-          placeholder="Search by name, email, admission no, contact, branch, club name or year"
+          placeholder="Search by name, email, contact, address, city, country or restaurant name."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none transition ease-in-out dark:bg-gray-600 dark:text-white w-full md:w-1/3"

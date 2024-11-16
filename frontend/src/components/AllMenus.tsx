@@ -228,7 +228,7 @@ const NoResultFound = () => {
                 No results found.
             </h1>
             <p className="mt-2 text-gray-500 dark:text-gray-400">
-                We couldn't find any events. <br />
+                We couldn't find any menus. <br />
             </p>
             <Link to="/">
                 <Button className="mt-4 bg-green hover:bg-hoverGreen dark:text-white">

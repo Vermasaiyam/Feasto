@@ -105,7 +105,7 @@ const AllUsers = () => {
 
         <Input
           type="text"
-          placeholder="Search by name, email, admission no, contact, branch, or year"
+          placeholder="Search by name, email, contact, address, city, or country."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none transition ease-in-out dark:bg-gray-600 dark:text-white w-full md:w-1/3"
