@@ -187,7 +187,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
     }
 }
 
-export const resetPassword = async (req: Request, res: Response)=> {
+export const resetPassword = async (req: Request, res: Response) => {
     try {
         // console.log(req.id);
         const userId = req.id;
@@ -274,5 +274,46 @@ export const updateProfile = async (req: Request, res: Response) => {
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
+export const allUsers = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const allUsers = await User.find().select("-password");
+
+        res.status(200).json({
+            success: true,
+            allUsers,
+            message: "All Users Fetched Successfully."
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+export const updateUsers = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { userId, email, fullname, isAdmin } = req.body;
+
+        const payload = {
+            ...(email && { email: email }),
+            ...(fullname && { fullname: fullname }),
+            ...({ admin: isAdmin }),
+        };
+
+        const updateUser = await User.findByIdAndUpdate(userId, payload, { new: true }).select("-password");
+
+        if (!updateUser) {
+            res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        res.status(200).json({
+            success: true,
+            updateUser,
+            message: "User Updated Successfully."
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 }
