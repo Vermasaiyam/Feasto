@@ -21,6 +21,8 @@ import Loading from './components/Loading'
 import { useThemeStore } from './store/useThemeStore'
 import AllRestaurants from './components/AllRestaurants'
 import AllMenus from './components/AllMenus'
+import RestaurantOwners from './head/RestaurantOwners'
+import AllUsers from './head/AllUsers'
 
 
 const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
@@ -52,6 +54,17 @@ const AdminRoute = ({ children }: { children: React.ReactNode }) => {
     return <Navigate to="/" replace />
   }
 
+  return children;
+}
+
+const HeadRoute = ({ children }: { children: React.ReactNode }) => {
+  const { user, isAuthenticated } = useUserStore();
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />
+  }
+  if (!user?.head) {
+    return <Navigate to="/" replace />
+  }
   return children;
 }
 
@@ -110,6 +123,22 @@ const appRouter = createBrowserRouter([
         element: <AdminRoute><Orders /></AdminRoute>,
       },
 
+      // head pages
+      {
+        path: "/head/admins",
+        element:
+          <HeadRoute>
+            <RestaurantOwners />
+          </HeadRoute>,
+      },
+      {
+        path: "/head/users",
+        element:
+          <HeadRoute>
+            <AllUsers />
+          </HeadRoute>,
+      },
+
       // Under construction page
       {
         path: '*',
@@ -149,7 +178,7 @@ const appRouter = createBrowserRouter([
 function App() {
 
   const { checkAuthentication, isCheckingAuth } = useUserStore();
-  const initializeTheme = useThemeStore((state:any) => state.initializeTheme);
+  const initializeTheme = useThemeStore((state: any) => state.initializeTheme);
   // checking auth every time when page is loaded
   useEffect(() => {
     checkAuthentication();
