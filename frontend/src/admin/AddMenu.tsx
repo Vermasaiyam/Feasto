@@ -205,7 +205,7 @@ const AddMenu = () => {
                         <img
                             src={menu.image}
                             alt={menu.name}
-                            className="md:h-24 md:w-24 h-28 w-full object-cover rounded-lg"
+                            className="md:h-24 md:w-24 h-28 w-full object-contain rounded-lg"
                         />
 
                         <div onClick={() => deleteMenu(menu._id)} className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 rounded-full p-1.5 cursor-pointer text-xs text-white">
