@@ -16,6 +16,7 @@ type User = {
     city: string;
     country: string;
     profilePicture: string;
+    head: boolean;
     admin: boolean;
     isVerified: boolean;
 }

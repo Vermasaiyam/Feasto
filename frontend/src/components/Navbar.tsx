@@ -8,7 +8,7 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar"
 import { Button } from "./ui/button";
-import { HandPlatter, Loader2, LogOut, Menu, Moon, PackageCheck, ShoppingCart, SquareMenu, Sun, User, User2, UtensilsCrossed } from "lucide-react";
+import { HandPlatter, Loader2, LogOut, Menu, Moon, PackageCheck, ShoppingCart, SquareMenu, Sun, User, User2, UserCheck2, Users2, UtensilsCrossed } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
@@ -43,7 +43,7 @@ const Navbar = () => {
   // const cart = [1, 2, 3];
 
   const { cart } = useCartStore();
-  const {setTheme} = useThemeStore();
+  const { setTheme } = useThemeStore();
 
   return (
     <nav className="bg-white dark:bg-[#020817] px-4 shadow-sm">
@@ -62,24 +62,44 @@ const Navbar = () => {
           <Link to="/restaurants" className="hover:text-hoverGreen  font-medium">Restaurants</Link>
           <Link to="/order/status" className="hover:text-hoverGreen  font-medium">My Orders</Link>
 
-          {user?.admin && (
+          {(user?.admin || user?.head) && (
             <Menubar>
               <MenubarMenu>
                 <MenubarTrigger className="cursor-pointer">Dashboard</MenubarTrigger>
                 <MenubarContent>
-                  <Link to="/admin/restaurant">
-                    <MenubarItem className="cursor-pointer">My Restaurant</MenubarItem>
-                  </Link>
-                  <Link to="/admin/menu">
-                    <MenubarItem className="cursor-pointer">My Menu</MenubarItem>
-                  </Link>
-                  <Link to="/admin/orders">
-                    <MenubarItem className="cursor-pointer">Orders</MenubarItem>
-                  </Link>
+                  {
+                    (user?.admin) && (
+                      <div className="">
+                        <Link to="/admin/restaurant">
+                          <MenubarItem className="cursor-pointer">My Restaurant</MenubarItem>
+                        </Link>
+                        <Link to="/admin/menu">
+                          <MenubarItem className="cursor-pointer">My Menu</MenubarItem>
+                        </Link>
+                        <Link to="/admin/orders">
+                          <MenubarItem className="cursor-pointer">Orders</MenubarItem>
+                        </Link>
+                      </div>
+                    )
+                  }
+                  {
+                    user?.head && (
+                      <div className="">
+                        <Link to="/head/admins">
+                          <Separator className="my-2" />
+                          <MenubarItem className="cursor-pointer">Restaurant Owners</MenubarItem>
+                        </Link>
+                        <Link to="/head/users">
+                          <MenubarItem className="cursor-pointer">All Users</MenubarItem>
+                        </Link>
+                      </div>
+                    )
+                  }
                 </MenubarContent>
               </MenubarMenu>
             </Menubar>
           )}
+
         </div>
 
         {/* Right-side buttons */}
@@ -107,8 +127,8 @@ const Navbar = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={()=> setTheme('light')}>Light</DropdownMenuItem>
-                <DropdownMenuItem onClick={()=> setTheme('dark')}>Dark</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -159,7 +179,7 @@ const MobileNavbar = () => {
 
   const { user, loading, logout } = useUserStore();
   const { cart } = useCartStore();
-  const {setTheme} = useThemeStore();
+  const { setTheme } = useThemeStore();
 
   // const cart = [1, 2, 3];
 
@@ -186,8 +206,8 @@ const MobileNavbar = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={()=> setTheme('light')}>Light</DropdownMenuItem>
-              <DropdownMenuItem onClick={()=> setTheme('dark')}>Dark</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </SheetHeader>
@@ -225,29 +245,58 @@ const MobileNavbar = () => {
           <div className="my-2">
             <Separator />
           </div>
-          {user?.admin && (
+          {(user?.admin || user?.head) && (
             <>
-              <Link
-                to="/admin/menu"
-                className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
-              >
-                <SquareMenu />
-                <span>My Menu</span>
-              </Link>
-              <Link
-                to="/admin/restaurant"
-                className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
-              >
-                <UtensilsCrossed />
-                <span>My Restaurant</span>
-              </Link>
-              <Link
-                to="/admin/orders"
-                className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
-              >
-                <PackageCheck />
-                <span>Restaurant Orders</span>
-              </Link>
+              {
+                (user?.admin) && (
+                  <div className="">
+                    <Link
+                      to="/admin/menu"
+                      className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+                    >
+                      <SquareMenu />
+                      <span>My Menu</span>
+                    </Link>
+                    <Link
+                      to="/admin/restaurant"
+                      className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+                    >
+                      <UtensilsCrossed />
+                      <span>My Restaurant</span>
+                    </Link>
+                    <Link
+                      to="/admin/orders"
+                      className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+                    >
+                      <PackageCheck />
+                      <span>Restaurant Orders</span>
+                    </Link>
+                  </div>
+                )
+              }
+
+              {/* for head */}
+              {
+                user?.head && (
+                  <div className="">
+                    <Separator className="my-2" />
+                    <Link
+                      to="/head/admins"
+                      className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+                    >
+                      <UserCheck2 />
+                      <span>Restaurant Owners</span>
+                    </Link>
+                    <Link
+                      to="/head/users"
+                      className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+                    >
+                      <Users2 />
+                      <span>All Users</span>
+                    </Link>
+                  </div>
+                )
+              }
             </>
           )}
         </SheetDescription>
