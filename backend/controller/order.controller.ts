@@ -38,7 +38,7 @@ export const getOrders = async (req: Request, res: Response) => {
 export const createCheckoutSession = async (req: Request, res: Response) => {
     try {
         const checkoutSessionRequest: CheckoutSessionRequest = req.body;
-        console.log("Checkout Session Request:", checkoutSessionRequest);
+        // console.log("Checkout Session Request:", checkoutSessionRequest);
 
         const restaurant = await Restaurant.findById(checkoutSessionRequest.restaurantId).populate("menus");
         if (!restaurant) {
@@ -46,13 +46,13 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
         }
 
         const menuItems = restaurant.menus;
-        console.log("Menu Items from Restaurant:", menuItems);
+        // console.log("Menu Items from Restaurant:", menuItems);
 
         const invalidCartItems = checkoutSessionRequest.cartItems.filter(
             (cartItem) => !menuItems.some((menuItem: any) => menuItem._id.toString() === cartItem.menuId)
         );
         if (invalidCartItems.length > 0) {
-            console.error("Invalid Cart Items:", invalidCartItems);
+            // console.error("Invalid Cart Items:", invalidCartItems);
             return res.status(400).json({
                 success: false,
                 message: "Invalid menu items in the cart.",
@@ -69,7 +69,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
         });
 
         const lineItems = createLineItems(checkoutSessionRequest, menuItems);
-        console.log("Generated Line Items:", lineItems);
+        // console.log("Generated Line Items:", lineItems);
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -89,7 +89,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
         }
 
         await order.save();
-        console.log("Order saved successfully:", order);
+        // console.log("Order saved successfully:", order);
 
         return res.status(200).json({ session });
     } catch (error) {
@@ -159,7 +159,7 @@ export const createLineItems = (checkoutSessionRequest: CheckoutSessionRequest, 
     const lineItems = checkoutSessionRequest.cartItems.map((cartItem) => {
         const menuItem = menuItems.find((item: any) => item._id.toString() === cartItem.menuId);
         if (!menuItem){
-            console.error(`Menu Item not found for menuId: ${cartItem.menuId}`);
+            // console.error(`Menu Item not found for menuId: ${cartItem.menuId}`);
             throw new Error(`Menu Item id not found for menuId: ${cartItem.menuId}`);
         }
 
