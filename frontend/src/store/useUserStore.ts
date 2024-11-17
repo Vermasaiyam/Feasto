@@ -5,7 +5,8 @@ import { LoginInputState, SignupInputState } from "@/schema/userSchema";
 import { toast } from "sonner";
 
 // const API_END_POINT = "https://feasto-3uh7.onrender.com/api/user"
-const API_END_POINT = "http://localhost:3000/api/user"
+const API_END_POINT = import.meta.env.VITE_API_END_POINT || "https://feasto-3uh7.onrender.com/api/user";
+
 axios.defaults.withCredentials = true;
 
 type User = {
