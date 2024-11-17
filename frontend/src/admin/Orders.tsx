@@ -19,7 +19,7 @@ const Orders = () => {
 
     useEffect(() => {
         getRestaurantOrders();
-        console.log(restaurantOrder);
+        // console.log(restaurantOrder);
     }, []);
 
     return (

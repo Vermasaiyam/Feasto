@@ -31,10 +31,6 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
-// app.get('/', (req, res) => {
-//     res.send('Hello, World!');
-// });
-
 
 app.use("/api/user", userRoute);
 app.use("/api/restaurant", restaurantRoute);

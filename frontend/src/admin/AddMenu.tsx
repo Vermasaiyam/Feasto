@@ -43,7 +43,7 @@ const AddMenu = () => {
 
     const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(input);
+        // console.log(input);
 
         const result = menuSchema.safeParse(input);
         if (!result.success) {

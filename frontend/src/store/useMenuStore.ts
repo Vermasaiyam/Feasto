@@ -84,7 +84,7 @@ export const useMenuStore = create<MenuState>()(persist((set) => ({
     fetchAllMenus: async () => {
         try {
             set({ loading: true });
-            console.log("start");
+            // console.log("start");
 
             const response = await axios.get(`${END_POINT}/menus`);
 

@@ -36,7 +36,7 @@ const Signup = () => {
 
     const signupSubmitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(input);
+        // console.log(input);
 
         const result = userSignupSchema.safeParse(input);
         if (!result.success) {

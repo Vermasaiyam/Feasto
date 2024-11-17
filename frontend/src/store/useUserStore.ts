@@ -57,7 +57,7 @@ export const useUserStore = create<UserState>()(persist((set, get) => ({
             });
             if (response.data.success) {
                 toast.success(response.data.message);
-                console.log(response.data);
+                // console.log(response.data);
 
                 set({
                     loading: false,
