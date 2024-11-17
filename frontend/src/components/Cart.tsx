@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [open, setOpen] = useState<boolean>(false);
-    const { cart, decrementQuantity, incrementQuantity, removeFromTheCart } = useCartStore();
+    const { cart, decrementQuantity, incrementQuantity, removeFromTheCart, clearCart } = useCartStore();
 
     let totalAmount = cart.reduce((acc, ele) => {
         return acc + ele.price * ele.quantity;
@@ -39,7 +39,7 @@ const Cart = () => {
                 ) : (
                     <div className="">
                         <div className="flex justify-end">
-                            <Button variant="link">Clear All</Button>
+                            <Button variant="link" onClick={clearCart}>Clear All</Button>
                         </div>
                         <Table>
                             <TableHeader>
