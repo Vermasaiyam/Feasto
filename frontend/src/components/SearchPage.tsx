@@ -94,7 +94,7 @@ const SearchPage = () => {
                             {loading ? (
                                 <SearchPageSkeleton />
                             ) : !loading && searchedRestaurant?.data.length === 0 ? (
-                                <NoResultFound searchText={params.id!} />
+                                <NoResultFound searchText={params.id!} searchQuery={searchQuery} />
                             ) : (
                                 searchedRestaurant?.data.map((restaurant: Restaurant) => (
                                     <Card
@@ -216,14 +216,14 @@ const SearchPageSkeleton = () => {
     );
 };
 
-const NoResultFound = ({ searchText }: { searchText: string }) => {
+const NoResultFound = ({ searchText, searchQuery }: { searchText: string, searchQuery: string }) => {
     return (
         <div className="text-center">
             <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
                 No results found
             </h1>
             <p className="mt-2 text-gray-500 dark:text-gray-400">
-                We couldn't find any results for "{searchText}". <br /> Try searching
+                We couldn't find any results for "{searchQuery || searchText}". <br /> Try searching
                 with a different term.
             </p>
             <Link to="/">
