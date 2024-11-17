@@ -5,7 +5,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 // const API_END_POINT = "https://feasto-3uh7.onrender.com/api/order"
 
-const API_END_POINT = import.meta.env.VITE_API_END_POINT || "https://feasto-3uh7.onrender.com/api/order";
+const API_END_POINT = import.meta.env.VITE_API_END_POINT_ORDER || "https://feasto-3uh7.onrender.com/api/order";
 
 axios.defaults.withCredentials = true;
 

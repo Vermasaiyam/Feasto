@@ -7,7 +7,7 @@ import { MenuState } from "@/types/menuType";
 
 // const API_END_POINT = "https://feasto-3uh7.onrender.com/api/menu";
 
-const API_END_POINT = import.meta.env.VITE_API_END_POINT || "https://feasto-3uh7.onrender.com/api/menu";
+const API_END_POINT = import.meta.env.VITE_API_END_POINT_MENU || "https://feasto-3uh7.onrender.com/api/menu";
 const END_POINT = import.meta.env.VITE_END_POINT || "https://feasto-3uh7.onrender.com/api"; 
 
 axios.defaults.withCredentials = true;

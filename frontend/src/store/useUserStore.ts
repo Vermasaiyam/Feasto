@@ -5,7 +5,7 @@ import { LoginInputState, SignupInputState } from "@/schema/userSchema";
 import { toast } from "sonner";
 
 // const API_END_POINT = "https://feasto-3uh7.onrender.com/api/user"
-const API_END_POINT = import.meta.env.VITE_API_END_POINT || "https://feasto-3uh7.onrender.com/api/user";
+const API_END_POINT = import.meta.env.VITE_API_END_POINT_USER || "https://feasto-3uh7.onrender.com/api/user";
 
 axios.defaults.withCredentials = true;
 

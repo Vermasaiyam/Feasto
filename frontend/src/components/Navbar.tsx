@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Menubar,
   MenubarContent,
@@ -45,6 +45,10 @@ const Navbar = () => {
   const { cart } = useCartStore();
   const { setTheme } = useThemeStore();
 
+  const location = useLocation();
+
+  const isActive = (path: any) => location.pathname === path ? "text-hoverGreen dark:text-green" : "";
+
   return (
     <nav className="bg-white dark:bg-[#020817] px-4 shadow-sm">
       <div className="container flex justify-between items-center mx-auto">
@@ -56,11 +60,10 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-6 items-center">
-          <Link to="/" className="hover:text-hoverGreen font-medium">Home</Link>
-          {/* <Link to="/profile" className="hover:text-hoverGreen  font-medium">Profile</Link> */}
-          <Link to="/menu" className="hover:text-hoverGreen  font-medium">Menu</Link>
-          <Link to="/restaurants" className="hover:text-hoverGreen  font-medium">Restaurants</Link>
-          <Link to="/order/status" className="hover:text-hoverGreen  font-medium">My Orders</Link>
+          <Link to="/" className={`hover:text-hoverGreen font-medium ${isActive("/")}`}>Home</Link>
+          <Link to="/menu" className={`hover:text-hoverGreen font-medium ${isActive("/menu")}`}>Menu</Link>
+          <Link to="/restaurants" className={`hover:text-hoverGreen font-medium ${isActive("/restaurants")}`}>Restaurants</Link>
+          <Link to="/order/status" className={`hover:text-hoverGreen font-medium ${isActive("/order/status")}`}>My Orders</Link>
 
           {(user?.admin || user?.head) && (
             <Menubar>
